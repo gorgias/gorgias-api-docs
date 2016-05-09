@@ -7,7 +7,6 @@ import { examples } from '../reformat_json';
 import _ from 'underscore';
 import { Table, Tr, Td, Th, Thead} from 'reactable';
 
-
 /* define Center Box  */
 class CenterColumnBox extends React.Component {
     render() {
@@ -45,7 +44,7 @@ export class DescriptionBox extends React.Component {
   		var tagName = this.props.tagName ;
   		var properties = openapi["definitions"][tagName]["properties"];
 
-  		/* create an array containing a Row component for each property for the current tag (=object) */
+  		/* create an array 'rows' containing a row component for each property for the current tag (=object) */
 		var rows = [];
 		for(var i in properties ) {
 			var name = i;
@@ -64,37 +63,38 @@ export class DescriptionBox extends React.Component {
 
 	        <CenterColumnBox> 
 	            <div style={{  marginBottom: 30 }}> 
+
+	            	{/* header od the Description Box */}
 	                <h1 style={{  fontSize: '24px', marginTop: 0, marginBottom: 5 }}> {this.props.tagName} </h1>
 	                  <p>
 	                     We define in plain english the object ... (define precisely what is the object)
 	                  </p>
+
+	                {/* Specifications */}
+	                <p style={{ marginTop: 0,  color: '#d0d4d7' }}> Specifications :  </p> 
+		        	<Card style={{ background: '#fafcfc', marginBottom: 10,padding: '5px 10px', fontSize: '13px'}} >
+		        		{/* create a Table for the specifications of the object */}
+			        	<Table className="table" id="table" style={{ width: '100%', textAlign:'left' }}>
+					        <Thead>
+					          <Th column="name" style={{ width: '25%' }} >
+					            <strong>Name</strong>
+					          </Th>
+					          <Th column="type" style={{ width: '15%' }}>
+					            <em>Type</em>
+					          </Th>
+					          <Th column="description" style={{ width: '60%' }}>
+					            <em>Description</em>
+					          </Th>
+					        </Thead>
+					        {rows}
+					    </Table>
+				    </Card>
+
 	            </div>
 	        </CenterColumnBox>
 
 	        <RightColumnBox> 
-
-	        	<p style={{ marginTop: 0,  color: '#d0d4d7' }}> Specifications :  </p> 
-
-	        	<Card style={{ background: '#fafcfc', marginBottom: 10,padding: '5px 10px', fontSize: '13px'}} >
-
-	        		{/* create a Table for the specifications of the object */}
-		        	<Table className="table" id="table" style={{ width: '100%', textAlign:'left' }}>
-				        <Thead>
-				          <Th column="name" style={{ width: '25%' }} >
-				            <strong>Name</strong>
-				          </Th>
-				          <Th column="type" style={{ width: '15%' }}>
-				            <em>Type</em>
-				          </Th>
-				          <Th column="description" style={{ width: '60%' }}>
-				            <em>Description</em>
-				          </Th>
-				        </Thead>
-				        {rows}
-				    </Table>
-
-			    </Card>
-
+	        	<p  style={{ marginBottom: 500 }} > </p>
 	        </RightColumnBox>
 
 	      </div>
@@ -110,16 +110,12 @@ export class PathBox extends React.Component {
   		var params = this.props.path.object.parameters;
   		var Parameters;
 		if( params != null){
-			console.log( "params" )
-			console.log( params )
 			
 	  		var rows = [];
 	  		for( var i in params){
 	  			var ref = params[i]["$ref"]
 	  			ref = ref.substring(13);
 	  			var parameter =  openapi["parameters"][ref];
-	  			console.log( "parameter" )
-	  			console.log( parameter )
 	  			var list = {}
 				list["name"]= parameter["name"]
 				list["required"]= parameter["required"]
@@ -187,8 +183,6 @@ export class PathBox extends React.Component {
         	if( schema["type"] == "array"){
         		var insideString = schema["items"]["$ref"];
         		insideString = insideString.substring(14);
-        		console.log("insideString");
-        		console.log(insideString);
         		insideString = _.findWhere(examples, {objectName:insideString}); /*  TO FINISH !! */
         		insideString = insideString["example"];
         		var responseString = JSON.stringify(insideString,null, 3);
@@ -201,7 +195,6 @@ export class PathBox extends React.Component {
         		responseString = responseString["example"];
         		responseExample = JSON.stringify(responseString,null, 3);
         	}
-        	
         }
         else{
         	responseExample = JSON.stringify(response["description"] ,null, 3);

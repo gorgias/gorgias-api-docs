@@ -25,7 +25,6 @@ for(var i in tagNames ) {
 }
 
 
-
 /* create all the Routes for each tag (i.e each Object) */
 const routes = (
   <Route path="/" component={Layout}>

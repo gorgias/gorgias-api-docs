@@ -71,8 +71,6 @@ for(var definition in definitions ) {
 
 
 
-
-
 /* 
   create array "tagNames" containing all the tagNames 
   var tagNames = ["Settings","User","Integration",... ]
@@ -91,7 +89,7 @@ for(var endpoint in paths ) {
 
 
 /* 
-  create array "tags" described at the top 
+  create array "tags":
   var tags = [ 
           {
               tagName:"Action", 
