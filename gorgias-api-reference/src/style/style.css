@@ -1,0 +1,112 @@
+
+@font-face{
+  font-family:"Museo 300";
+  src:url(fonts/MuseoSansRounded-300.otf) format("opentype")
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-size: 15px;
+  line-height: 1.6;
+  font-family:  'Source Sans Pro',Arial,'Helvetica Neue',Helvetica,sans-serif;
+  color: #444;
+  background: #F7F7F7;
+}
+
+h1,h2 {
+  font-family: "Museo 300",Arial,'Helvetica Neue',Helvetica,sans-serif;
+}
+
+
+h3 {
+  margin-top: 60px;
+}
+
+a, a:visited {
+  color: #888;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #aaa;
+}
+
+a:active {
+  color: #444;
+}
+
+.navigation a, .navigation a:visited {
+  color: #0A202D;
+}
+
+.navigation a:hover {
+  color: #34A1CA;
+}
+
+.navigation a:active {
+  color: #444;
+}
+
+
+.columnLeft{
+  width:15%;
+  position: fixed; 
+  padding-left: 20px;
+  height: 100%; 
+  float: left;
+  background: #fafcfc;
+}
+
+.tag{
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  width: 85%;
+  left:15%;
+}
+
+.columnCenter, .columnCenter:before {
+    width:45%;
+}
+
+.columnCenter{ 
+  float: left;
+}
+
+.columnCenter:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+    left: 0%;
+    background-color: white;
+}
+
+.columnRight, .columnRight:before {
+    width:55%;
+}
+
+.columnRight{
+  float: left;
+  background-color:#2d3134;
+}
+
+
+.columnRight:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+    left: 45%;
+    background-color: #2d3134;
+}
+
