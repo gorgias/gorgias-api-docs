@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/afrancisboeuf/gorgias-api-reference"
+    "url": "https://github.com/gorgias/gorgias-docs/gorgias-api-reference"
   },
   "keywords": [
     "gorgias"
@@ -16,9 +16,9 @@
   "author": "Gorgias",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/afrancisboeuf/gorgias-api-reference"
+    "url": "https://github.com/gorgias/gorgias-docs/gorgias-api-reference/issues"
   },
-  "homepage": "https://github.com/afrancisboeuf/gorgias-api-reference",
+  "homepage": "https://github.com/gorgias/gorgias-docs/gorgias-api-reference",
   "devDependencies": {
     "babel-core": "^6.0.20",
     "babel-eslint": "^4.1.3",

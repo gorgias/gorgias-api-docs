@@ -1,15 +1,9 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Link } from 'react-router';
-import Card  from './Card';
-import Column from './Column';
-import { tagNames } from '../reformat_json';
+import { tagNames, otherDefinitions } from '../reformat_json';
 
 /* create the Base Component (responsible for the global layout) */
 var Layout = React.createClass({
-
-  childContextTypes: {
-    viewport: PropTypes.any,
-  },
 
   clicked: function(index){
         this.setState({focused: index});
@@ -17,90 +11,87 @@ var Layout = React.createClass({
 
   getInitialState() {
     return {
-      viewport: this._getRetrieveViewport(), 
       focused: -1
     };
   },
 
-  getChildContext() {
-    return {
-      viewport: this._getRetrieveViewport(),
-    };
-  },
-
-  componentWillMount() {
-    window.addEventListener('resize', this._triggerResizeMixinCallback);
-  },
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this._triggerResizeMixinCallback);
-  },
-  
-  _getRetrieveViewport() {
-    return {
-      width: document.documentElement.clientWidth,
-      height: document.documentElement.clientHeight,
-    };
-  },
-
-  _triggerResizeMixinCallback() {
-    this.setState({
-      viewport: this._getRetrieveViewport(),
-    });
-  },
-
-
   render() {
 
-    /* create the component for the top menu*/
+    /* create introductionLink :  component for the top menu*/
     var color = "";
     if(this.state.focused == -1 ){   color ="#0099e5" ; }         
-    var introductionLink =  <li> <Link style={{ display: 'block', padding: '3px 0', color: color }} to="/" onClick={this.clicked.bind(this, -1)}>Getting Started</Link> </li>
-               
-    /* create an array 'objectLinks' containing each Tag Name and their path for the rest of the menu */
-    var objectLinks = [];
+    const introductionLink =  <li> <Link style={{ color: color }} to="/" onClick={this.clicked.bind(this, -1)}>Getting Started</Link> </li>
+    
+    /* *** TAGS *** */
+
+    /* create array 'objectLinks' containing each Tag Name and their path for the rest of the menu */
+    const tagLinks = [];
     for(var i in tagNames ) {
       var tag = tagNames[i] ;
       var path = tag.toLowerCase();
       path = "/".concat(path);
       var color = "";
       if(this.state.focused == i){ color ="#0099e5" };
-      var objectLink = <li><Link style={{ display: 'block', padding: '3px 0', color: color }} to={path} onClick={this.clicked.bind(this, i)} >{tag}</Link></li>
-      objectLinks.push( objectLink );
+      var tagLink = <li><Link style={{ color: color }} to={path} onClick={this.clicked.bind(this, i)} >{tag}</Link></li>
+      tagLinks.push( tagLink );
     }
 
-    console.log("focused", this.state.focused);
+    /* *** DEFINITIONS *** */
+
+    /* create array 'definitionLinks' containing each Object Definition (which is not already defined as a Tag in the API CALLS menu) */
+    const definitionLinks = [];
+    for(var i in otherDefinitions ) {
+      var definition = otherDefinitions[i] ;
+      var path = definition.toLowerCase();
+      path = "/".concat(path);
+      var color = "";
+      if(this.state.focused == i){ color ="#0099e5" };
+      var definitionLink = <li><Link style={{ color: color }} to={path} onClick={this.clicked.bind(this, i)} >{definition}</Link></li>
+      definitionLinks.push( definitionLink );
+    }
 
     return (
-      <Column >
+      <div >
 
-        {/* Left Column */}
-        <Column className="navigation columnLeft">
+        {/*  *** Navigation SideColumn  *** */}
+        <div className="navigationWrapper">
 
-            <h1 style={{fontSize: '20px' }}> 
-              Gorgias  <span style={{ color: '#0099e5', fontSize: '20px' }}> API </span> 
-            </h1>
+            <div className="navigation" >
 
-            {/* top menu */}
-            <span style={{ color: '#939da3' }}> INTRODUCTION </span>
-            <ul style={{ listStyleType: 'none', paddingLeft: 0, marginTop: 0 }}>
-              {introductionLink}
-            </ul>
+                <h1>Gorgias  <span style={{ color: '#0099e5'}}> API </span></h1>
 
-            {/* rest of the menu */}
-            <span style={{ color: '#939da3' }}> OBJECTS </span>
-            <ul style={{ listStyleType: 'none', paddingLeft: 0, marginTop: 0  }}>
-              {objectLinks}
-            </ul>   
+                {/* *** TOP *** */}
+                <p> INTRODUCTION </p>
+                <ul> {introductionLink}</ul>
 
-        </Column>
+                {/* *** TAGS *** */}
+                <p > API CALLS </p>
+                <ul> {tagLinks} </ul>  
 
-        {/* rest of the Page, Center and Right Column -> render the 'Tag' Component */}
-        <div className="tag" >
-          { this.props.children }
+                 {/* *** DEFINITIONS *** */}
+                <p > DEFINITIONS </p>
+                <ul> {definitionLinks} </ul>  
+
+            </div> 
+
         </div>
 
-    </Column>  
+        {/*  *** MAIN (everything exept the Navigation SideColumn)  *** */}
+        <div className="mainWrapper">
+
+            {/*  *** MAIN BACKGROUND : two columns : white and grey  *** */}
+            <div className="main-background">
+                <div className="left-background">
+                </div>
+                <div className="right-background">
+                </div>
+            </div>
+
+            {/* *** CONTENT *** */}
+            { this.props.children }
+        </div>
+
+    </div>  
     );
 
   }
