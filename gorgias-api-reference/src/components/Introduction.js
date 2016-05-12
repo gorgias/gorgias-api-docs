@@ -30,7 +30,7 @@ export default class Introduction extends React.Component {
               <div className="Grid-inside">  
                 
                 <h3 className="text-right">API Endpoint</h3> 
-                <Code className="code request" value={ codeExample } />
+                <Code className="code" value={ codeExample } />
               
               </div>
             </div>

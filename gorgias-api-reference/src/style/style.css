@@ -172,14 +172,16 @@ a:active {
 
 .Grid-left {
   display: flex;
-  flex: 0 0 45%;
+  /*flex: 0 0 45%;*/
+  width:45%;
   background-color: white;
   
 }
 
 .Grid-right {
   display: flex;
-  flex: 0 0 55%;
+  /*flex: 1;*/
+  width:55%;
   background-color:#2d3134;
 }
 
