@@ -1,6 +1,6 @@
 
-import openapi from './openapi_json';
 import _ from 'underscore';
+var openapi = require("json!./openapi.json");
 
 /* contain the descriptions of the objects of the API ( "Account", "AccountMeta", "Action", ...) */
 var definitions = openapi.definitions;
@@ -257,6 +257,7 @@ for ( var i in tagNames){
 
 
 module.exports = {
+    openapi: openapi,
     tagNames: tagNames,
     otherDefinitions: otherDefinitions,
     tags: tags

@@ -4,7 +4,7 @@ import Layout from './components/Layout';
 import Introduction from './components/Introduction';
 import Tag from './components/Tag';
 import Definition from './components/Definition';
-import { tagNames, otherDefinitions } from './reformat_json';
+import { tagNames, otherDefinitions } from './objects';
 
 /* *** TAGS *** */
 
@@ -22,7 +22,8 @@ for(var i in tagNames ) {
 	var tag = tagNames[i] ;
 	var path = tag.toLowerCase();
 	path = "/".concat(path);
-	var tagRoute = <Route  path={path} tag={tag} component={TagWrapper}  />
+	var key = parseInt(i)+1;
+	var tagRoute = <Route key={key} path={path} tag={tag} component={TagWrapper}  />
 	tagRoutes.push( tagRoute );
 }
 
@@ -44,7 +45,8 @@ for(var i in otherDefinitions ) {
 	var definition = otherDefinitions[i] ;
 	var path = definition.toLowerCase();
 	path = "/".concat(path);
-	var definitionRoute = <Route path={path} definition={definition} component={DefinitionWrapper} />
+	var key = tagNames.length+ parseInt(i)+1;
+	var definitionRoute = <Route key={key} path={path} definition={definition} component={DefinitionWrapper} />
 	definitionRoutes.push( definitionRoute );
 }
 
@@ -52,7 +54,7 @@ for(var i in otherDefinitions ) {
 /* create all the Routes for each tag (i.e each Object) */
 const routes = (
   <Route path="/" component={Layout} >
-	  <IndexRoute component={Introduction} /> 
+	  <IndexRoute key={0} component={Introduction} /> 
 	  {tagRoutes}
 	  {definitionRoutes}
   </Route>

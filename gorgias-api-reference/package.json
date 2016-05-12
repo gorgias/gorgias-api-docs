@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "highlight.js": "=9.2.0",
+    "json-loader": "^0.5.4",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
     "react-router": "^2.4.0",

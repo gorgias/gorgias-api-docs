@@ -1,14 +1,14 @@
 import React from 'react';
-import openapi from '../openapi_json';
+import {openapi} from '../objects';
 import _ from 'underscore';
 import { Table, Tr, Td, Th, Thead} from 'reactable';
-
+import { Link } from 'react-router';
 
 /* *** Attribute Component *** */
 export class Attribute extends React.Component {
   	render() {
 
-  		/* create an array 'rows' containing a row component for each property for the current object (tag or definition) */
+  		/* *** array 'rows' containing a row component for each property for the current object (tag or definition) *** */
   		var rows = [];
   		var name  = this.props.name;
   		var object = openapi["definitions"][name];
@@ -20,7 +20,10 @@ export class Attribute extends React.Component {
 		for(var property in properties ) {
 			var type = properties[property]["type"] ;
 			if( type == null & properties[property]["$ref"]  != null ){
-				type = properties[property]["$ref"].substring(14);
+				var objectName = properties[property]["$ref"].substring(14);
+				var path = objectName.toLowerCase();
+				path = "/".concat(path);
+				type = <Link to={path}>{objectName}</Link>;
 			}
 			var isRequired = false;
 			if( _.contains(required, property)){
@@ -28,10 +31,14 @@ export class Attribute extends React.Component {
 			}
 			if( type == "array" & properties[property]["items"] != null ){ 
 				if(  properties[property]["items"]["$ref"] != null ){ 
-					type = "array (of ".concat(properties[property]["items"]["$ref"].substring(14), ")");
+					var objectName = properties[property]["items"]["$ref"].substring(14);
+					var path = objectName.toLowerCase();
+					path = "/".concat(path);
+					var link = <Link to={path}>{objectName}</Link>;
+					var type = <span>array of {link} </span>;
 				}
 				if(  properties[property]["items"]["type"] != null ){ 
-					type = "array (of ".concat(properties[property]["items"]["type"].substring(14), ")");
+					type = "array (of ".concat(properties[property]["items"]["type"], ")");
 				}
 			} 
 			var description = properties[property]["description"] ;
@@ -40,14 +47,15 @@ export class Attribute extends React.Component {
 			list["type"]= type ;
 			list["description"] = description ;
 			list["required"] = isRequired ;
-			var row =  <Tr  data={list} />
+			var key = property;
+			var row =  <Tr key={key}  data={list} />
 			rows.push( row );
 		} 
 		
   		return (
 
             <div className="tableCard">
-        		{/* create a Table for the specifications of the object */}
+        		{/* *** Table for the Attributes of the object *** */}
 	        	<Table className="table" id="table" style={{ width: '100%', textAlign:'left' }}>
 			        <Thead>
 			          <Th column="name" style={{ width: '25%' }} >

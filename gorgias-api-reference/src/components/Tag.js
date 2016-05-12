@@ -1,6 +1,6 @@
 import React from 'react';
 import { Path } from './Path';
-import { tags } from '../reformat_json';
+import { tags } from '../objects';
 import {Attribute}  from './Attribute';
 import _ from 'underscore';
 
@@ -17,7 +17,8 @@ export default class Tag extends React.Component {
     /* create the array PathBoxes containing the PathBox Component for each tag */
     var Paths = [];
     for(var i in tagPaths ) {
-        Paths.push( <Path path= { tagPaths[i] } />);
+        var key = parseInt(i)+1;
+        Paths.push( <Path key={key} path= { tagPaths[i] } />);
     }
 
     return (

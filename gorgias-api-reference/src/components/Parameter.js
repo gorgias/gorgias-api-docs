@@ -1,6 +1,6 @@
 import React from 'react';
 import Code from './Code';
-import openapi from '../openapi_json';
+import {openapi} from '../objects';
 import { Table, Tr, Td, Th, Thead} from 'reactable';
 
 /* *** Parameter Component *** */
@@ -23,7 +23,8 @@ export class Parameter extends React.Component {
 				list["required"]= parameter["required"]
 				list["description"] = parameter["description"] 
 				list["type"] = parameter["type"] 
-				var row =  <Tr  data={list} />
+				var key = parseInt(i)+1;
+				var row =  <Tr   key={key}  data={list} />
 				rows.push( row );
 	  		}
 		}

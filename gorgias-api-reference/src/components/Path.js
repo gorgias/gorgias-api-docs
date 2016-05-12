@@ -1,6 +1,6 @@
 import React from 'react';
 import Code from './Code';
-import openapi from '../openapi_json';
+import {openapi} from '../objects';
 import { Parameter } from './Parameter';
 import { Table, Tr, Td, Th, Thead} from 'reactable';
 

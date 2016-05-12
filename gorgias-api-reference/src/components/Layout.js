@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { tagNames, otherDefinitions } from '../reformat_json';
+import { tagNames, otherDefinitions } from '../objects';
 
 /* create the Base Component (responsible for the global layout) */
 var Layout = React.createClass({
@@ -20,7 +20,7 @@ var Layout = React.createClass({
     /* create introductionLink :  component for the top menu*/
     var color = "";
     if(this.state.focused == -1 ){   color ="#0099e5" ; }         
-    const introductionLink =  <li> <Link style={{ color: color }} to="/" onClick={this.clicked.bind(this, -1)}>Getting Started</Link> </li>
+    const introductionLink =  <li key={0}> <Link key={0} style={{ color: color }} to="/" onClick={this.clicked.bind(this, -1)}>Getting Started</Link> </li>
     
     /* *** TAGS *** */
 
@@ -30,9 +30,10 @@ var Layout = React.createClass({
       var tag = tagNames[i] ;
       var path = tag.toLowerCase();
       path = "/".concat(path);
+      var key = parseInt(i)+1;
       var color = "";
       if(this.state.focused == i){ color ="#0099e5" };
-      var tagLink = <li><Link style={{ color: color }} to={path} onClick={this.clicked.bind(this, i)} >{tag}</Link></li>
+      var tagLink = <li  key={key} ><Link  key={key} style={{ color: color }} to={path} onClick={this.clicked.bind(this, i)} >{tag}</Link></li>
       tagLinks.push( tagLink );
     }
 
@@ -44,9 +45,10 @@ var Layout = React.createClass({
       var definition = otherDefinitions[i] ;
       var path = definition.toLowerCase();
       path = "/".concat(path);
+      var key = tagNames.length+ parseInt(i)+1;
       var color = "";
       if(this.state.focused == i){ color ="#0099e5" };
-      var definitionLink = <li><Link style={{ color: color }} to={path} onClick={this.clicked.bind(this, i)} >{definition}</Link></li>
+      var definitionLink = <li  key={key} ><Link key={key} style={{ color: color }} to={path} onClick={this.clicked.bind(this, i)} >{definition}</Link></li>
       definitionLinks.push( definitionLink );
     }
 
