@@ -50,7 +50,8 @@ for(const i in otherDefinitions ) {
 /* *** Routes for each object (tag and definition) *** */
 export const routes = (
   <Route path="/" component={Layout} >
-	  <IndexRoute key={0} component={Introduction} /> 
+  	  <IndexRoute component={Introduction} /> 
+	  <Route  path="/introduction" key={0} component={Introduction} /> 
 	  {tagRoutes}
 	  {definitionRoutes}
   </Route>

@@ -4,48 +4,28 @@ import { tagNames, otherDefinitions } from '../objects';
 
 export default React.createClass({
 
-  clicked: function(index){
-        this.setState({focused: index});
-  },
-
-  getInitialState() {
-    return {
-      focused: -1
-    };
-  },
 
   render() {
-
-    /* create introductionLink :  component for the top menu*/
-    let color = "";
-    if(this.state.focused == -1 ){   color ="#0099e5" ; }         
-    const introductionLink =  <li key={0}> <Link key={0} style={{ color: color }} to="/" onClick={this.clicked.bind(this, -1)}>Getting Started</Link> </li>
-    
-    /* *** TAGS *** */
+     
+    const introductionLink =  <li key={0}> <Link key={0} activeClassName="activeLink"  to="/introduction" >Getting Started</Link> </li>
 
     /* create array 'objectLinks' containing each Tag Name and their path for the rest of the menu */
     const tagLinks = [];
     for(const i in tagNames ) {
       const tag = tagNames[i] ;
       const path = "/".concat(tag.toLowerCase());
-      const key = parseInt(i)+1;
-      let color = "";
-      if(this.state.focused == i){ color ="#0099e5" };
-      const tagLink = <li  key={key} ><Link  key={key} style={{ color: color }} to={path} onClick={this.clicked.bind(this, i)} >{tag}</Link></li>
+      const index = parseInt(i)+1;
+      const tagLink = <li  key={index} ><Link activeClassName="activeLink" key={index}  to={path}  >{tag}</Link></li>
       tagLinks.push( tagLink );
     }
-
-    /* *** DEFINITIONS *** */
 
     /* create array 'definitionLinks' containing each Object Definition (which is not already defined as a Tag in the API CALLS menu) */
     const definitionLinks = [];
     for(const i in otherDefinitions ) {
       const definition = otherDefinitions[i] ;
       const path = "/".concat(definition.toLowerCase());
-      const key = tagNames.length+ parseInt(i)+1;
-      let color = "";
-      if(this.state.focused == i){ color ="#0099e5" };
-      const definitionLink = <li  key={key} ><Link key={key} style={{ color: color }} to={path} onClick={this.clicked.bind(this, i)} >{definition}</Link></li>
+      const index = tagNames.length+ parseInt(i)+1;
+      const definitionLink = <li  key={index} ><Link activeClassName="activeLink" key={index} to={path} >{definition}</Link></li>
       definitionLinks.push( definitionLink );
     }
 

@@ -4,9 +4,9 @@
   "description": "Reference for the Gorgias API.",
   "main": "src/App.js",
   "scripts": {
-    "build" : "webpack -p",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build" : "NODE_ENV=production webpack -p",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",

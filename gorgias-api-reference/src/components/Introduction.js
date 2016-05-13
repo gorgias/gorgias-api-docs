@@ -2,12 +2,12 @@ import React from 'react';
 import _ from 'underscore';
 import Code from './Code';
 
-const codeExample = `https://yourcompanyname.gorgias.com/api/`;
-
 /* *** Component Introduction *** */
 export default React.createClass({
 
   render() {
+
+    const codeExample = `https://yourcompanyname.gorgias.com/api/`;
 
     return (
       <div className="main">

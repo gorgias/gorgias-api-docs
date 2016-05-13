@@ -14,9 +14,7 @@ export default React.createClass({
   		const verb = path.verb ;
   		const status = path.responseStatus;
   		const responseExample  = path.responseExample;
-        const request = verb.concat('  ', path.endpoint );
         const response = path.object.responses[status];
-
         let Parameters ;
   		const params = path.object.parameters;
 		if( params != null){
@@ -29,19 +27,19 @@ export default React.createClass({
             <div className="Grid-left">
             	<div className="Grid-inside"> 
 
-	            	{/* description of the path */}
+	            	{/* *** description *** */}
 	            	<div>
 		                <h1>{summary}</h1>
 		                <p>{description}</p>
 	                </div>
 
-	                {/* description of the request */}
+	                {/* *** request *** */}
 	                <div>
-		                <h2>HTTP Request</h2>
-		                <Code className="code request" value={request} />
+		            <h2>HTTP Request</h2>
+		            <div className="code request">  {verb} &nbsp; {path.endpoint} </div>
 	                </div>
 
-	                {/* ***  Parameters if needed *** */}
+	                {/* ***  Parameters (if needed) *** */}
 	                {Parameters}
 
 	            </div> 

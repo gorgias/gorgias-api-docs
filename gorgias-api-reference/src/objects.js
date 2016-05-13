@@ -1,17 +1,23 @@
 import _ from 'underscore';
 
+/* *** 
+original JSON : 
+OPEN API specs 
+*** */
 export const openapi = require("json!./openapi.json");
 
 
-/* *** the objects of the API ( "Account", "AccountMeta", "Action", ...) *** */
-const definitions = openapi.definitions;
-
-
-/* *** endpoints of the API ("/api/actions/", "/api/actions/{id}/", ...) *** */
+/* *** 
+endpoints of the API 
+("/api/actions/", "/api/actions/{id}/", ...) 
+*** */
 const paths = openapi.paths; 
 
 
-/* *** array "tagNames" containing all the names of the tags : const tagNames = ["Action","Event","Integration","Rule","Settings","Ticket","TickeMessage","User", "Widget", WidgetFields" ] *** */
+/* *** 
+array "tagNames" containing all the names of the tags : 
+const tagNames = ["Action","Event","Integration","Rule","Settings","Ticket","TickeMessage","User", "Widget", WidgetFields" ] 
+*** */
 export const tagNames = []
 for(const endpoint in paths ) {
   for(const verb in paths[endpoint] ) {
@@ -22,8 +28,16 @@ for(const endpoint in paths ) {
    }
 }
 
+/* *** 
+objects of the API  :
+( "Account", "AccountMeta", "Action", ...) 
+*** */
+const definitions = openapi.definitions;
 
-/* *** array "otherObjects" containing all the objects which are not already in the tagNames array *** */
+/* *** 
+array "otherDefinitions" containing all the objects which are not already in the tagNames array 
+const otherDefinitions = ["Account","AccountMeta","Attachment","Decoration","Group",... ] 
+*** */
 export const otherDefinitions = []
 for(const definition in definitions ) {
     if ( _.contains( tagNames, definition ) == false ){
@@ -32,36 +46,16 @@ for(const definition in definitions ) {
 }
 
 
-/* *** renders the array of dependencies ( = other object as Attributes ) for each object : "objectName" -> ["objectName","objectName"]  */
-const getDependencies = function(objectName){
-  const dependencies = [];
-  if( definitions[objectName] ){
-    const object = definitions[objectName]["properties"];
-    for( const key in object){
-      if( !object[key]["type"]  && object[key]["$ref"] ){
-          const ref = object[key]["$ref"];
-          const objectName = ref.substring(14); 
-          dependencies.push(objectName);
-      }
-      if ( object[key]["type"] == "array" && object[key]["items"]["$ref"] ){
-          const ref = object[key]["items"]["$ref"];
-          const objectName = ref.substring(14); 
-          dependencies.push(objectName);
-      }
-    }
-  }
-  return dependencies;
-}
+/* *** 
+list of examples : 
+{"objectName": objectExample, ... } 
+*** */
+export const examplesList ={};
 
-
-/* *** array of examples : {"objectName": objectExample, ... } *** */
-const examplesList ={};
-
-// commence par UserAuth, AccountMeta, Attachment
-//User (, UserChannel, Group, Organization, Role) , UserConnection, WidgetFieldValue, Decoration, WidgetField, Widget, 
-
-
-/*  create function createExample : replace type string by "a string", integer by a specific integer, type "date-time" by a specific date, etc... */
+/* ***
+function createExample : 
+replace type string by "a string", integer by a specific integer, type "date-time" by a specific date, etc...
+*** */
 const createExample = function(objectName){
   const example = {};
   if( definitions[objectName] ){
@@ -93,7 +87,7 @@ const createExample = function(objectName){
               example[key] = examplesList[objectName];
           }
           else{
-              example[key] = objectName;
+              example[key] = "<object:".concat(objectName, ">");
           }
       }
       else if ( object[key]["type"] == "array" && object[key]["items"]["$ref"] ){
@@ -104,7 +98,7 @@ const createExample = function(objectName){
                arrayString.push(examplesList[objectName]);
           }
           else{
-              arrayString.push(objectName);
+              arrayString.push("<object:".concat(objectName, ">"));
           }
           arrayString.push("...");
           example[key] = arrayString ;
@@ -113,14 +107,19 @@ const createExample = function(objectName){
           example[key] = "..." ;
       }
     }
-  // examplesList[objectName] = example;
+  examplesList[objectName] = example;
   }
   return example;
 }
 
+for(const definition in definitions ) {
+    createExample(definition);
+}
 
 
-/* *** return the status success number in function of the verb (get, post, put, delete) *** */
+/* *** 
+return the status success number in function of the verb 
+*** */
 const responseStatus = function(verb){
     let status;
     switch(verb){
@@ -143,11 +142,11 @@ const responseStatus = function(verb){
 
 
 /* ***
-  create array "tags":
+  array "tags" containing all the data needed to create the Tag Component
   const tags = [ 
           {
               tagName:"Action", 
-              tagDependencies: ["ObjectName","ObjectName",...],
+              tagDependencies: ["ObjectName","ObjectName",...],  <-- removed
               tagPaths:[
                   {
                       verb: "GET", 
@@ -171,12 +170,13 @@ const responseStatus = function(verb){
 export const tags = [];
 for ( const i in tagNames){
     const tag = {};
-    tag["tagName"] = tagNames[i] ;
-    tag["tagDependencies"] = getDependencies(tagNames[i]);
+    const tagName = tagNames[i];
+    tag["tagName"] =  tagName ;
+    /*tag["tagDependencies"] = getDependencies(tagNames[i]);*/
     const tagPaths = [];
     for(const endpoint in paths ) {
       for(const verb in paths[endpoint] ) {
-          if ( paths[endpoint][verb]["tags"][0] == tagNames[i] ){
+          if ( paths[endpoint][verb]["tags"][0] == tagName){
             const tagPath = {};
             tagPath["verb"] = verb.toUpperCase();
             tagPath["endpoint"] = endpoint;
@@ -189,7 +189,8 @@ for ( const i in tagNames){
               if( schema["type"] == "array"){
                 const responseString = schema["items"]["$ref"].substring(14);
                 if( responseExample != null ){
-                    responseExample = createExample(responseString);
+                    /*responseExample = createExample(responseString);*/
+                    responseExample = examplesList[responseString];
                 }
                 responseExample = JSON.stringify(responseExample,null, 2);
                 responseExample =  "[".concat(responseExample, ",\n...\n]");
@@ -197,7 +198,8 @@ for ( const i in tagNames){
               else{
                 const responseString = schema["$ref"].substring(14);
                 if( responseString != null ){
-                  responseExample = createExample(responseString);
+                  /*responseExample = createExample(responseString);*/
+                  responseExample = examplesList[responseString];
                 }
                 responseExample = JSON.stringify(responseExample,null, 2);
               }
@@ -214,3 +216,33 @@ for ( const i in tagNames){
     tags.push(tag);
 }
 
+
+/* *** 
+renders the array of dependencies ( = other object as Attributes ) for each object : 
+"objectName" -> ["objectName","objectName"]  
+
+const getDependencies = function(objectName){
+  const dependencies = [];
+  if( definitions[objectName] ){
+    const object = definitions[objectName]["properties"];
+    for( const key in object){
+      if( !object[key]["type"]  && object[key]["$ref"] ){
+          const ref = object[key]["$ref"];
+          const objectName = ref.substring(14); 
+          dependencies.push(objectName);
+      }
+      if ( object[key]["type"] == "array" && object[key]["items"]["$ref"] ){
+          const ref = object[key]["items"]["$ref"];
+          const objectName = ref.substring(14); 
+          dependencies.push(objectName);
+      }
+    }
+  }
+  return dependencies;
+}
+
+export const dependenciesList={};
+for(const tagName in tagNames ) {
+    dependenciesList[tagName] = getDependencies(tagName);
+}
+*** */

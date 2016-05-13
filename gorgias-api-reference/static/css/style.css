@@ -35,6 +35,7 @@ h2 {
 
 h3 {
   font-size: 15px;
+  margin-top: 30px;
 }
 
 a, a:visited {
@@ -79,6 +80,10 @@ a:active {
 
 .navigation a:active {
   color: #444;
+}
+
+.navigation li .activeLink{
+      color: #0099e5;
 }
 
 .navigation p {
@@ -237,6 +242,7 @@ a:active {
 }
 
 .code{
+  font-size:13px;
   font-family: 'Consolas', "Liberation Mono", Menlo, Courier, monospace;
   border-radius: 5px;
   background: #282b2c;
@@ -245,7 +251,7 @@ a:active {
 
 .request{
   background:#fafcfc;
-  color:  #282b2c;
+  color:  #444;
   padding: 15px;
 }
 
@@ -256,5 +262,6 @@ a:active {
   padding: 5px 10px;
   font-size: 12px
 }
+
 
 
