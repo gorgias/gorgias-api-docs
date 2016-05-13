@@ -1,32 +1,31 @@
 
-var webpack = require('webpack');
-var path = require('path');
+const webpack = require('webpack');
+const path = require('path');
 
-var APP_DIR = path.resolve(__dirname, 'src');
-var BUILD_DIR = path.resolve(__dirname, 'static');
-var __PRODUCTION__ = process.env.NODE_ENV === 'production';
+const APP_DIR = path.resolve(__dirname, 'src');
+const BUILD_DIR = path.resolve(__dirname, 'static');
+const __PRODUCTION__ = process.env.NODE_ENV === 'production';
 
-var entry = [
+const entry = [
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
     APP_DIR + '/App.js'
   ];
-var outputDev = {
+const outputDev = {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
     publicPath: '/static/'
-};
-var outputBuild = {
+  };
+const outputBuild = {
     path: BUILD_DIR,
     filename: 'bundle.js'
-};
-var output = outputDev;
+  };
+let output = outputDev;
 if (__PRODUCTION__) {
     output = outputBuild;
 }
-
-var plugins = [ new webpack.HotModuleReplacementPlugin() ];
-var loaders = [
+const plugins = [ new webpack.HotModuleReplacementPlugin() ];
+const loaders = [
     {
       test: /\.js$/,
       loaders: ['react-hot', 'babel'],
