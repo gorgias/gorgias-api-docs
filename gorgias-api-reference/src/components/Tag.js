@@ -1,23 +1,23 @@
 import React from 'react';
-import { Path } from './Path';
+import Path from './Path';
 import { tags } from '../objects';
-import {Attribute}  from './Attribute';
+import Attribute  from './Attribute';
 import _ from 'underscore';
 
 /* ***  Tag  Component *** */
-export default class Tag extends React.Component {
+export default React.createClass({
 
   render() {
 
     /* obtain the array tagPaths containing all the Paths (endpoint+verb) for a specific tag  */
-    var tagName = this.props.tagName ;
-    var tag = _.findWhere(tags, {tagName:tagName});
-    var tagPaths = tag["tagPaths"];
+    const tagName = this.props.tagName ;
+    const tag = _.findWhere(tags, {tagName:tagName});
+    const tagPaths = tag["tagPaths"];
    
     /* create the array PathBoxes containing the PathBox Component for each tag */
-    var Paths = [];
-    for(var i in tagPaths ) {
-        var key = parseInt(i)+1;
+    const Paths = [];
+    for(const i in tagPaths ) {
+        const key = parseInt(i)+1;
         Paths.push( <Path key={key} path= { tagPaths[i] } />);
     }
 
@@ -54,5 +54,5 @@ export default class Tag extends React.Component {
       </div>
     )
   }
-}
+})
 

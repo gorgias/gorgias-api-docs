@@ -1,11 +1,11 @@
 import React from 'react';
 import Code from './Code';
 import {openapi} from '../objects';
-import { Parameter } from './Parameter';
+import Parameter from './Parameter';
 import { Table, Tr, Td, Th, Thead} from 'reactable';
 
 /* *** Path Component *** */
-export class Path extends React.Component {
+export default React.createClass({
   	render() {
 
   		const path = this.props.path ;
@@ -17,7 +17,7 @@ export class Path extends React.Component {
         const request = verb.concat('  ', path.endpoint );
         const response = path.object.responses[status];
 
-        var Parameters ;
+        let Parameters ;
   		const params = path.object.parameters;
 		if( params != null){
 			Parameters = <Parameter path= {this.props.path} />
@@ -60,5 +60,5 @@ export class Path extends React.Component {
 	       </div>
 	    )
   	}
-}
+})
 

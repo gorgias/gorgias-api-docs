@@ -4,8 +4,8 @@ import Code from './Code';
 
 const codeExample = `https://yourcompanyname.gorgias.com/api/`;
 
-/* *** Component Definition *** */
-export default class Introduction extends React.Component {
+/* *** Component Introduction *** */
+export default React.createClass({
 
   render() {
 
@@ -40,7 +40,7 @@ export default class Introduction extends React.Component {
     )
 
   }
-}
+})
 
 
 

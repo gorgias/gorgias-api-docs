@@ -1,9 +1,9 @@
 import React from 'react';
 import _ from 'underscore';
-import {Attribute}  from './Attribute';
+import Attribute  from './Attribute';
 
-/* *** Component Definition *** */
-export default class Definition extends React.Component {
+/* ***  Definition Component *** */
+export default React.createClass({
 
   render() {
 
@@ -38,5 +38,5 @@ export default class Definition extends React.Component {
     )
 
   }
-}
+})
 

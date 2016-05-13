@@ -4,27 +4,24 @@ import {openapi} from '../objects';
 import { Table, Tr, Td, Th, Thead} from 'reactable';
 
 /* *** Parameter Component *** */
-export class Parameter extends React.Component {
+export default React.createClass({
   	render() {
 
   		/* create the Parameters Table if needed */
   		const path = this.props.path;
   		const params = path.object.parameters;
-  		var Parameters;
+  		const rows = [];
 		if( params != null){
-			
-	  		var rows = [];
-	  		for( var i in params){
-	  			var ref = params[i]["$ref"]
-	  			ref = ref.substring(13);
-	  			var parameter =  openapi["parameters"][ref];
-	  			var list = {}
+	  		for( const i in params){
+	  			const ref = params[i]["$ref"].substring(13);
+	  			const parameter =  openapi["parameters"][ref];
+	  			const list = {}
 				list["name"]= parameter["name"]
 				list["required"]= parameter["required"]
 				list["description"] = parameter["description"] 
 				list["type"] = parameter["type"] 
-				var key = parseInt(i)+1;
-				var row =  <Tr   key={key}  data={list} />
+				const key = parseInt(i)+1;
+				const row =  <Tr   key={key}  data={list} />
 				rows.push( row );
 	  		}
 		}
@@ -57,5 +54,5 @@ export class Parameter extends React.Component {
 		    </div>
 	    )
   	}
-}
+})
 

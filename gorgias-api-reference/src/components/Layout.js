@@ -2,8 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { tagNames, otherDefinitions } from '../objects';
 
-/* create the Base Component (responsible for the global layout) */
-var Layout = React.createClass({
+export default React.createClass({
 
   clicked: function(index){
         this.setState({focused: index});
@@ -18,7 +17,7 @@ var Layout = React.createClass({
   render() {
 
     /* create introductionLink :  component for the top menu*/
-    var color = "";
+    let color = "";
     if(this.state.focused == -1 ){   color ="#0099e5" ; }         
     const introductionLink =  <li key={0}> <Link key={0} style={{ color: color }} to="/" onClick={this.clicked.bind(this, -1)}>Getting Started</Link> </li>
     
@@ -26,14 +25,13 @@ var Layout = React.createClass({
 
     /* create array 'objectLinks' containing each Tag Name and their path for the rest of the menu */
     const tagLinks = [];
-    for(var i in tagNames ) {
-      var tag = tagNames[i] ;
-      var path = tag.toLowerCase();
-      path = "/".concat(path);
-      var key = parseInt(i)+1;
-      var color = "";
+    for(const i in tagNames ) {
+      const tag = tagNames[i] ;
+      const path = "/".concat(tag.toLowerCase());
+      const key = parseInt(i)+1;
+      let color = "";
       if(this.state.focused == i){ color ="#0099e5" };
-      var tagLink = <li  key={key} ><Link  key={key} style={{ color: color }} to={path} onClick={this.clicked.bind(this, i)} >{tag}</Link></li>
+      const tagLink = <li  key={key} ><Link  key={key} style={{ color: color }} to={path} onClick={this.clicked.bind(this, i)} >{tag}</Link></li>
       tagLinks.push( tagLink );
     }
 
@@ -41,14 +39,13 @@ var Layout = React.createClass({
 
     /* create array 'definitionLinks' containing each Object Definition (which is not already defined as a Tag in the API CALLS menu) */
     const definitionLinks = [];
-    for(var i in otherDefinitions ) {
-      var definition = otherDefinitions[i] ;
-      var path = definition.toLowerCase();
-      path = "/".concat(path);
-      var key = tagNames.length+ parseInt(i)+1;
-      var color = "";
+    for(const i in otherDefinitions ) {
+      const definition = otherDefinitions[i] ;
+      const path = "/".concat(definition.toLowerCase());
+      const key = tagNames.length+ parseInt(i)+1;
+      let color = "";
       if(this.state.focused == i){ color ="#0099e5" };
-      var definitionLink = <li  key={key} ><Link key={key} style={{ color: color }} to={path} onClick={this.clicked.bind(this, i)} >{definition}</Link></li>
+      const definitionLink = <li  key={key} ><Link key={key} style={{ color: color }} to={path} onClick={this.clicked.bind(this, i)} >{definition}</Link></li>
       definitionLinks.push( definitionLink );
     }
 
@@ -97,6 +94,5 @@ var Layout = React.createClass({
     );
 
   }
-});
+})
 
-export default Layout;
