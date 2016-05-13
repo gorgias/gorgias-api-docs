@@ -13,48 +13,46 @@ export default class Path extends React.Component {
   		const summary = path.object.summary;
         const description = path.object.description;
   		const verb = path.verb ;
+  		const request = <div>  {verb} &nbsp; {path.endpoint} </div> ;
   		const status = path.responseStatus;
   		const responseExample  = path.responseExample;
         const response = path.object.responses[status];
         let Parameters ;
   		const params = path.object.parameters;
 		if( params != null){
-			Parameters = <Parameter path= {this.props.path} />
+			Parameters = <Parameter path= {this.props.path} /> ;
 		}
 
 	    return (
 	      	<div className="Grid">
-	      	{/* *** Left Column *** */}
-            <div className="Grid-left">
-            	<div className="Grid-inside"> 
+	      	
+	            <div className="Grid-left">
+	            	<div className="Grid-inside"> 
 
-	            	{/* *** description *** */}
-	            	<div>
-		                <h1>{summary}</h1>
-		                <p>{description}</p>
-	                </div>
+		            	{/* *** description *** */}
+		            	<div>
+			                <h1>{summary}</h1>
+			                <p>{description}</p>
+		                </div>
 
-	                {/* *** request *** */}
-	                <div>
-		            <h2>HTTP Request</h2>
-		            <div className="code request">  {verb} &nbsp; {path.endpoint} </div>
-	                </div>
+		                {/* ***  Parameters (if needed) *** */}
+		                {Parameters}
 
-	                {/* ***  Parameters (if needed) *** */}
-	                {Parameters}
+		            </div> 
+		        </div>
 
-	            </div> 
-	        </div>
+		      
+	            <div className="Grid-right">
+	            	<div className="Grid-inside">
 
-	        {/* *** Right Column *** */}
-            <div className="Grid-right">
-            	<div className="Grid-inside">
+	            		<h3 className="text-right"> HTTP Request </h3> 
+			            <Code className="code" value={request} />
 
-            		<h3 className="text-right"> Example Response ( status :  {status} )  </h3> 
-		            <Code className="code" value={responseExample} />
-	        	
-	        	</div>
-	       </div>
+	            		<h3 className="text-right"> Example Response ( status :  {status} )  </h3> 
+			            <Code className="code" value={responseExample} />
+		        	
+		        	</div>
+		       </div>
 
 	       </div>
 	    )

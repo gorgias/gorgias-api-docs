@@ -24,7 +24,6 @@ export default class Definition extends React.Component {
       <div className="main ">
         <div className="Grid">
 
-            {/* *** first block *** */}
             <div className="Grid-left ">
               	<div className="Grid-inside">     	
 	                <h1> {this.props.definitionName} </h1>
@@ -34,7 +33,7 @@ export default class Definition extends React.Component {
             <div className="Grid-right">
             </div>
 
-            {/* *** second block *** */}
+            {/* *** Attribute *** */}
             <div className="Grid-left ">
                 <div className="Grid-inside">    
                   <Attribute name = {this.props.definitionName} />
