@@ -2,14 +2,14 @@ import React from 'react';
 import { Link } from 'react-router';
 import { tagNames, otherDefinitions } from '../objects';
 
-export default React.createClass({
-
+/* *** Layout Component *** */
+export default class Layout extends React.Component {
 
   render() {
      
     const introductionLink =  <li key={0}> <Link key={0} activeClassName="activeLink"  to="/introduction" >Getting Started</Link> </li>
 
-    /* create array 'objectLinks' containing each Tag Name and their path for the rest of the menu */
+    /* *** array 'objectLinks' containing each Tag Name and their path for the rest of the menu *** */
     const tagLinks = [];
     for(const i in tagNames ) {
       const tag = tagNames[i] ;
@@ -19,7 +19,7 @@ export default React.createClass({
       tagLinks.push( tagLink );
     }
 
-    /* create array 'definitionLinks' containing each Object Definition (which is not already defined as a Tag in the API CALLS menu) */
+    /* *** array 'definitionLinks' containing each Object Definition (which is not already defined as a Tag in the API CALLS menu) *** */
     const definitionLinks = [];
     for(const i in otherDefinitions ) {
       const definition = otherDefinitions[i] ;
@@ -39,15 +39,12 @@ export default React.createClass({
 
                 <h1>Gorgias  <span style={{ color: '#0099e5'}}> API </span></h1>
 
-                {/* *** TOP *** */}
                 <p> INTRODUCTION </p>
                 <ul> {introductionLink}</ul>
 
-                {/* *** TAGS *** */}
                 <p > API CALLS </p>
                 <ul> {tagLinks} </ul>  
 
-                 {/* *** DEFINITIONS *** */}
                 <p > DEFINITIONS </p>
                 <ul> {definitionLinks} </ul>  
 
@@ -55,10 +52,10 @@ export default React.createClass({
 
         </div>
 
-        {/*  *** MAIN (everything exept the Navigation SideColumn)  *** */}
+        {/*  *** MAIN (everything except the Navigation SideColumn)  *** */}
         <div className="mainWrapper">
 
-            {/*  *** MAIN BACKGROUND : two columns : white and grey  *** */}
+            {/*  *** MAIN BACKGROUND : two columns : white and grey in background  *** */}
             <div className="main-background">
                 <div className="left-background">
                 </div>
@@ -66,13 +63,14 @@ export default React.createClass({
                 </div>
             </div>
 
-            {/* *** CONTENT *** */}
+            {/* *** CONTENT (Tag or Definition) *** */}
             { this.props.children }
+
         </div>
 
     </div>  
     );
 
   }
-})
+}
 

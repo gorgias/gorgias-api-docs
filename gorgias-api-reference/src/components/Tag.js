@@ -6,7 +6,7 @@ import Code from './Code';
 import _ from 'underscore';
 
 /* ***  Tag  Component *** */
-export default React.createClass({
+export default class Tag extends React.Component {
 
   render() {
 
@@ -67,5 +67,5 @@ export default React.createClass({
       </div>
     )
   }
-})
+}
 

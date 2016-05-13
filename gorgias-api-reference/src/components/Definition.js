@@ -5,7 +5,7 @@ import Code from './Code';
 import {examplesList, openapi} from '../objects';
 
 /* ***  Definition Component *** */
-export default React.createClass({
+export default class Definition extends React.Component {
 
   render() {
 
@@ -51,5 +51,5 @@ export default React.createClass({
     )
 
   }
-})
+}
 

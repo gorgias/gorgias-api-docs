@@ -3,7 +3,7 @@ import _ from 'underscore';
 import Code from './Code';
 
 /* *** Component Introduction *** */
-export default React.createClass({
+export default class Introduction extends React.Component {
 
   render() {
 
@@ -40,7 +40,7 @@ export default React.createClass({
     )
 
   }
-})
+}
 
 
 

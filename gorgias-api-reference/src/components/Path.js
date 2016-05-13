@@ -5,7 +5,8 @@ import Parameter from './Parameter';
 import { Table, Tr, Td, Th, Thead} from 'reactable';
 
 /* *** Path Component *** */
-export default React.createClass({
+export default class Path extends React.Component {
+
   	render() {
 
   		const path = this.props.path ;
@@ -58,5 +59,5 @@ export default React.createClass({
 	       </div>
 	    )
   	}
-})
+}
 

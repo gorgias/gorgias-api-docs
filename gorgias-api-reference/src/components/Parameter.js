@@ -4,7 +4,8 @@ import {openapi} from '../objects';
 import { Table, Tr, Td, Th, Thead} from 'reactable';
 
 /* *** Parameter Component *** */
-export default React.createClass({
+export default class Parameter extends React.Component {
+
   	render() {
 
   		/* create the Parameters Table if needed */
@@ -54,5 +55,5 @@ export default React.createClass({
 		    </div>
 	    )
   	}
-})
+}
 

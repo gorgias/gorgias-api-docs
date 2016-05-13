@@ -1,10 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import highlightJs from 'highlight.js';
 import { isEqual, omit, extend } from 'underscore';
 
-
-export default class Code extends Component {
+export default class Code extends React.Component {
 
   constructor(properties) {
     super(properties);

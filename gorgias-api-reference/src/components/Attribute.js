@@ -1,11 +1,11 @@
 import React from 'react';
-import {openapi} from '../objects';
 import _ from 'underscore';
+import {openapi} from '../objects';
 import { Table, Tr, Td, Th, Thead} from 'reactable';
 import { Link } from 'react-router';
 
 /* *** Attribute Component *** */
-export default React.createClass({
+export default class Attribute extends React.Component {
   	render() {
 
   		/* *** array 'rows' containing a row component for each property for the current object (tag or definition) *** */
@@ -86,4 +86,4 @@ export default React.createClass({
 		    </div>
         )
   	}
-})
+}
