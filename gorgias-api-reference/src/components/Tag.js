@@ -1,6 +1,6 @@
 import React from 'react';
 import Path from './Path';
-import { tags, examplesList } from '../objects';
+import { tags, examplesList, openapi } from '../objects';
 import Attribute  from './Attribute';
 import Code from './Code';
 import _ from 'underscore';
@@ -11,6 +11,15 @@ export default React.createClass({
   render() {
 
     const example = JSON.stringify(examplesList[this.props.tagName],null, 2);
+    let Example ;
+    if( openapi["definitions"][this.props.tagName] != null ){
+      Example = (
+        <div>
+          <h3 className="text-right">Example</h3> 
+          <Code className="code" value= {example} />
+        </div>
+      )
+    }
 
     /* obtain the array tagPaths containing all the Paths (endpoint+verb) for a specific tag  */
     const tagName = this.props.tagName ;
@@ -23,6 +32,7 @@ export default React.createClass({
         const key = parseInt(i)+1;
         Paths.push( <Path key={key} path= { tagPaths[i] } />);
     }
+
 
     return (
       <div className="main">
@@ -46,8 +56,7 @@ export default React.createClass({
             </div>
             <div className="Grid-right">
                 <div className="Grid-inside">  
-                  <h3 className="text-right">Example</h3> 
-                  <Code className="code" value= {example} />
+                  {Example}
                 </div>
             </div>
             </div>

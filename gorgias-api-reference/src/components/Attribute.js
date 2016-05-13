@@ -10,7 +10,7 @@ export default React.createClass({
 
   		/* *** array 'rows' containing a row component for each property for the current object (tag or definition) *** */
   		const rows = [];
-  		let inside;
+  		let Inside;
   		const name  = this.props.name;
   		if( openapi["definitions"][name] != null ){
 
@@ -53,7 +53,7 @@ export default React.createClass({
 				rows.push( row );
 			} 
 
-			inside = (
+			Inside = (
 				<div>
 				<h2> {name} Attributes : </h2> 
 				<div className="tableCard">
@@ -82,7 +82,7 @@ export default React.createClass({
 
   		return (
   			<div>
-  				{inside}
+  				{Inside}
 		    </div>
         )
   	}

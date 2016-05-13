@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'underscore';
 import Attribute  from './Attribute';
 import Code from './Code';
-import {examplesList} from '../objects';
+import {examplesList, openapi} from '../objects';
 
 /* ***  Definition Component *** */
 export default React.createClass({
@@ -10,6 +10,15 @@ export default React.createClass({
   render() {
 
     const example = JSON.stringify(examplesList[this.props.definitionName],null, 2);
+    let Example ;
+    if( openapi["definitions"][this.props.definitionName] != null ){
+      Example = (
+        <div>
+          <h3 className="text-right">Example</h3> 
+          <Code className="code" value= {example} />
+        </div>
+      )
+    }
 
     return (
       <div className="main ">
@@ -33,8 +42,7 @@ export default React.createClass({
             </div>
             <div className="Grid-right">
                 <div className="Grid-inside">  
-                  <h3 className="text-right">Example</h3> 
-                  <Code className="code" value={ example } />
+                  {Example}
                 </div>
             </div>
 

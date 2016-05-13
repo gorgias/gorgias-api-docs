@@ -62,7 +62,7 @@ const createExample = function(objectName){
     const object = definitions[objectName]["properties"];
     for( const key in object){
       if( object[key]["type"] == "string"  &&  object[key]["format"] == "date-time"  ){
-          example[key] = "2016-05-08T05:02:04.221Z"; /* example of date */
+          example[key] = "2016-05-08T05:02:04.221Z"; 
       }
       else if(  object[key]["type"] == "string"  ){
          example[key] = "a string";
@@ -145,8 +145,7 @@ const responseStatus = function(verb){
   array "tags" containing all the data needed to create the Tag Component
   const tags = [ 
           {
-              tagName:"Action", 
-              tagDependencies: ["ObjectName","ObjectName",...],  <-- removed
+              tagName:"Action",
               tagPaths:[
                   {
                       verb: "GET", 
@@ -172,7 +171,6 @@ for ( const i in tagNames){
     const tag = {};
     const tagName = tagNames[i];
     tag["tagName"] =  tagName ;
-    /*tag["tagDependencies"] = getDependencies(tagNames[i]);*/
     const tagPaths = [];
     for(const endpoint in paths ) {
       for(const verb in paths[endpoint] ) {
@@ -189,7 +187,6 @@ for ( const i in tagNames){
               if( schema["type"] == "array"){
                 const responseString = schema["items"]["$ref"].substring(14);
                 if( responseExample != null ){
-                    /*responseExample = createExample(responseString);*/
                     responseExample = examplesList[responseString];
                 }
                 responseExample = JSON.stringify(responseExample,null, 2);
@@ -198,7 +195,6 @@ for ( const i in tagNames){
               else{
                 const responseString = schema["$ref"].substring(14);
                 if( responseString != null ){
-                  /*responseExample = createExample(responseString);*/
                   responseExample = examplesList[responseString];
                 }
                 responseExample = JSON.stringify(responseExample,null, 2);
@@ -216,33 +212,3 @@ for ( const i in tagNames){
     tags.push(tag);
 }
 
-
-/* *** 
-renders the array of dependencies ( = other object as Attributes ) for each object : 
-"objectName" -> ["objectName","objectName"]  
-
-const getDependencies = function(objectName){
-  const dependencies = [];
-  if( definitions[objectName] ){
-    const object = definitions[objectName]["properties"];
-    for( const key in object){
-      if( !object[key]["type"]  && object[key]["$ref"] ){
-          const ref = object[key]["$ref"];
-          const objectName = ref.substring(14); 
-          dependencies.push(objectName);
-      }
-      if ( object[key]["type"] == "array" && object[key]["items"]["$ref"] ){
-          const ref = object[key]["items"]["$ref"];
-          const objectName = ref.substring(14); 
-          dependencies.push(objectName);
-      }
-    }
-  }
-  return dependencies;
-}
-
-export const dependenciesList={};
-for(const tagName in tagNames ) {
-    dependenciesList[tagName] = getDependencies(tagName);
-}
-*** */
