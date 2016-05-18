@@ -1,5 +1,8 @@
 import _ from 'underscore';
 
+
+
+
 /* *** 
 original JSON : 
 OPEN API specs 
@@ -211,4 +214,33 @@ for ( const i in tagNames){
     tag["tagPaths"] = tagPaths ;
     tags.push(tag);
 }
+
+
+/* load the json
+var getJSON = function(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('get', url, true);
+    xhr.responseType = 'json';
+    xhr.onload = function() {
+      var status = xhr.status;
+      if (status == 200) {
+        callback(null, xhr.response);
+      } else {
+        callback(status);
+      }
+    };
+    xhr.send();
+};
+
+export let json;
+
+getJSON('https://gorgias.gorgias.io/doc/openapi.json', function(err, data) {
+  if (err != null) {
+    console.log('ERROR requesting json : ' + err);
+  } else {
+    json = data ; 
+    console.log("data result", data );
+  }
+});
+*/
 

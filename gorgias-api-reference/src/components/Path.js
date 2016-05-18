@@ -47,7 +47,7 @@ export default class Path extends React.Component {
 
 	            		<h3 className="text-right"> HTTP Request </h3> 
 			            <Code className="code" value={request} />
-
+						
 	            		<h3 className="text-right"> Example Response ( status :  {status} )  </h3> 
 			            <Code className="code" value={responseExample} />
 		        	
