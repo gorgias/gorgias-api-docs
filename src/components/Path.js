@@ -2,6 +2,7 @@ import React from 'react'
 import {fromJS} from 'immutable'
 import data from '../../data/openapi.json'
 import {Response} from './Response'
+import {Properties} from './Properties'
 
 const openapi = fromJS(data)
 
@@ -39,38 +40,23 @@ export const Parameters = ({parameters}) => {
         return null
     }
 
-    return (
-        <table className="ui very basic collapsing celled table">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Description</th>
-            </tr>
-            </thead>
-            <tbody>
-            {parameters.map((paramRef, i) => (
-                <Parameter key={i} paramRef={paramRef}/>
-            )).toList()}
-            </tbody>
-        </table>
-    )
-}
-
-export const Parameter = ({paramRef}) => {
-    if (!paramRef.get('$ref')) {
-        console.error('Invalid parameter reference', paramRef)
-        return null
+    /* map the parameters to the same structure as the definition object,
+     * so we can re-use the properties component.
+     */
+    var def = {
+      properties: {}
     }
 
-    const param = openapi.getIn(['parameters', paramRef.get('$ref').replace('#/parameters/', '')])
+    parameters.map((paramRef, i) => {
+       let param = openapi.getIn(['parameters', paramRef.get('$ref').replace('#/parameters/', '')])
+
+       def.properties[param.get('name')] = param
+    })
+
+    def = fromJS(def)
 
     return (
-        <tr>
-            <td>{param.get('name')}</td>
-            <td>{param.get('type')}</td>
-            <td>{param.get('description')}</td>
-        </tr >
+      <Properties name="Request" definition={def}/>
     )
 }
 
