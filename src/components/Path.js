@@ -1,13 +1,14 @@
 import React from 'react'
 import {fromJS} from 'immutable'
 import data from '../../data/openapi.json'
-import {Response} from './Response'
+import {Responses} from './Responses'
 import {Properties} from './Properties'
 
 const openapi = fromJS(data)
 
 const Verb = ({verb, method, uri}) => {
     var responses = verb.get('responses')
+
     return (
         <div className="content-block">
             <div className="content-block-details">
@@ -21,15 +22,7 @@ const Verb = ({verb, method, uri}) => {
             <div className="content-block-request">
                 <h3 className="content-block-request-title">HTTP Request</h3>
                 <code className="code">{method.toUpperCase()} {uri}</code>
-                {responses.map((response, status) => {
-                    return (
-                        <div key={status}>
-                            <h3 className="content-block-request-title">Example Response (status: {status}) </h3>
-                            <Response response={response} />
-                        </div>
-                    )
-                }
-                ).toList()}
+                <Responses responses={responses} />
             </div>
         </div>
     )
