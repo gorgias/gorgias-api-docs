@@ -17,9 +17,11 @@ const Property = ({prop, name, required}) => {
                     {prop.get('type')}
                 </span>
 
-                <p>
-                    {prop.get('description')}
-                </p>
+                { prop.get('description') ? (
+                    <p>
+                        {prop.get('description')}
+                    </p>
+                ) : null }
             </td>
         </tr>
     )

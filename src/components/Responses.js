@@ -5,7 +5,7 @@ const openapi = fromJS(data)
 
 export const Responses = ({responses}) => {
     return (
-        <div>
+        <div className="responses">
             {
                 responses.map((response, status) => (
                     <Response key={status} response={response} status={status} />
@@ -28,9 +28,9 @@ const Response = ({response, status}) => {
     }
 
     return (
-        <div>
+        <div className="response-item">
             <h3 className="content-block-request-title">
-                Response (status: {status})
+                Response object <strong>({status})</strong>
             </h3>
 
             {props ? <ResponseTable properties={props} /> : null}
@@ -40,11 +40,11 @@ const Response = ({response, status}) => {
 
 const ResponseTable = ({properties}) => {
     return (
-        <table>
+        <table className="response-table">
             <tbody>
                 {
-                    properties.map((a, b) => (
-                        <ResponseTableRow a={a} b={b} key={b}  />
+                    properties.map((property, name) => (
+                        <ResponseTableRow property={property} name={name} key={name}  />
                     )).toList()
                 }
             </tbody>
@@ -52,11 +52,24 @@ const ResponseTable = ({properties}) => {
     )
 }
 
-const ResponseTableRow = ({a,b}) => {
+const ResponseTableRow = ({property, name}) => {
     return (
         <tr>
-            <td>{b}</td>
-            <td>{a.get('type')}</td>
+            <td>
+                <code className="response-table-name">
+                    {name}
+                </code>
+            </td>
+            <td>
+                <span className="response-table-type">
+                    {property.get('type')}
+                </span>
+                { property.get('description') ? (
+                    <p>
+                        {property.get('description')}
+                    </p>
+                ) : null }
+            </td>
         </tr>
     )
 }

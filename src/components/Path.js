@@ -12,16 +12,18 @@ const Verb = ({verb, method, uri}) => {
     return (
         <div className="content-block">
             <div className="content-block-details">
-                {/*  description  */}
-                <div>
-                    <h1>{verb.get('summary')}</h1>
-                    <p>{verb.get('description')}</p>
-                </div>
+                <h1>{verb.get('summary')}</h1>
+                <p>{verb.get('description')}</p>
+
                 <Parameters parameters={verb.get('parameters')}/>
             </div>
             <div className="content-block-request">
                 <h3 className="content-block-request-title">HTTP Request</h3>
-                <code className="code">{method.toUpperCase()} {uri}</code>
+                <code className="content-block-request-code">
+                    <strong>
+                        {method.toUpperCase()}
+                    </strong> {uri}
+                </code>
                 <Responses responses={responses} />
             </div>
         </div>
@@ -57,7 +59,7 @@ export const Path = ({uri, verbs}) => {
     const parts = uri.split('/')
     const anchor = parts.slice(1, parts.length - 1).join('-')
     return (
-        <div className="paths" id={anchor}>
+        <div className="path" id={anchor}>
             {verbs.map((verb, method) => (
                 <Verb key={method} verb={verb} method={method} uri={uri}/>
             )).toList()}
