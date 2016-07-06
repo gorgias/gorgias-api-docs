@@ -4,22 +4,22 @@ const Property = ({prop, name, required}) => {
     return (
         <tr>
             <td>
-              <code className="properties-table-name">
-                {name}
-              </code>
+                <code className="properties-table-name">
+                    {name}
+                </code>
 
-              {required && required.includes(name) ? (
-                <span className="properties-table-required">REQUIRED</span>
-              ) : null}
+                {required && required.includes(name) ? (
+                    <span className="properties-table-required">REQUIRED</span>
+                ) : null}
             </td>
             <td>
-              <span className="properties-table-type">
-                {prop.get('type')}
-              </span>
+                <span className="properties-table-type">
+                    {prop.get('type')}
+                </span>
 
-              <p>
-                {prop.get('description')}
-              </p>
+                <p>
+                    {prop.get('description')}
+                </p>
             </td>
         </tr>
     )
@@ -33,7 +33,7 @@ export const Properties = ({name, definition}) => {
     return (
         <div className="properties">
             <h2 className="properties-title">
-              {name} attributes
+                {name} attributes
             </h2>
             <table className="properties-table">
                 <tbody>

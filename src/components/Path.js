@@ -37,19 +37,19 @@ export const Parameters = ({parameters}) => {
      * so we can re-use the properties component.
      */
     var def = {
-      properties: {}
+        properties: {}
     }
 
     parameters.map((paramRef, i) => {
-       let param = openapi.getIn(['parameters', paramRef.get('$ref').replace('#/parameters/', '')])
+        let param = openapi.getIn(['parameters', paramRef.get('$ref').replace('#/parameters/', '')])
 
-       def.properties[param.get('name')] = param
+        def.properties[param.get('name')] = param
     })
 
     def = fromJS(def)
 
     return (
-      <Properties name="Request" definition={def}/>
+        <Properties name="Request" definition={def}/>
     )
 }
 

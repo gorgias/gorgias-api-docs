@@ -27,6 +27,10 @@
     "new-cap": [
       "off"
     ],
+    "jsx-quotes": [
+      "warn",
+      "prefer-double"
+    ],
     "react/jsx-indent-props": [
       "off"
     ],

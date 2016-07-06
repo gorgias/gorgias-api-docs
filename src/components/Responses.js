@@ -4,17 +4,15 @@ import data from '../../data/openapi.json'
 const openapi = fromJS(data)
 
 export const Responses = ({responses}) => {
-  return (
-    <div>
-
-    {
-      responses.map((response, status) => (
-          <Response key={status} response={response} status={status} />
-      )).toList()
-    }
-
-    </div>
-  )
+    return (
+        <div>
+            {
+                responses.map((response, status) => (
+                    <Response key={status} response={response} status={status} />
+                )).toList()
+            }
+        </div>
+    )
 }
 
 const Response = ({response, status}) => {
@@ -22,21 +20,20 @@ const Response = ({response, status}) => {
     var props = null
 
     if (!schema) {
-      return null
+        return null
     }
 
     if (schema.get('$ref')) {
-      props = openapi.getIn(['definitions', schema.get('$ref').replace('#/definitions/', ''), 'properties'])
+        props = openapi.getIn(['definitions', schema.get('$ref').replace('#/definitions/', ''), 'properties'])
     }
 
     return (
         <div>
-          <h3 className="content-block-request-title">
-            Response (status: {status})
-          </h3>
+            <h3 className="content-block-request-title">
+                Response (status: {status})
+            </h3>
 
-          {props ? <ResponseTable properties={props} /> : null}
-
+            {props ? <ResponseTable properties={props} /> : null}
         </div>
     )
 }
@@ -45,11 +42,11 @@ const ResponseTable = ({properties}) => {
     return (
         <table>
             <tbody>
-              {
-                properties.map((a, b) => (
-                  <ResponseTableRow a={a} b={b} key={b}  />
-                )).toList()
-              }
+                {
+                    properties.map((a, b) => (
+                        <ResponseTableRow a={a} b={b} key={b}  />
+                    )).toList()
+                }
             </tbody>
         </table>
     )

@@ -17,6 +17,13 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin()
     ],
     module: {
+        preLoaders: [
+            {
+                test: /\.js$/,
+                loader: 'eslint-loader',
+                exclude: /node_modules/
+            }
+        ],
         loaders: [
             {
                 test: /\.js$/,
@@ -36,5 +43,8 @@ module.exports = {
                 loader: 'url-loader?limit=30000&name=[name]-[hash].[ext]'
             }
         ]
+    },
+    standard: {
+      parser: 'babel-eslint'
     }
 };

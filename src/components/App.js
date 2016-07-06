@@ -13,10 +13,10 @@ export const App = ({children}) => (
         {/*   Navigation SideColumn   */}
         <div className="navigation">
             <IndexLink href="/" className="logo" to="/">
-              <img src={logo} alt="Gorgias"/>
-              <span>
-                API
-              </span>
+                <img src={logo} alt="Gorgias"/>
+                <span>
+                  API
+                </span>
             </IndexLink>
 
             <h2>INTRODUCTION</h2>
