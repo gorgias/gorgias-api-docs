@@ -1,11 +1,21 @@
 import React from 'react'
 
 const Property = ({prop, name, required}) => {
+    const displayName = prop.get('type') || prop.get('$ref').split('/')[2]
+    let displayComp = displayName
+
+
+    if (!prop.get('type') && prop.get('$ref')) {
+        const url = prop.get('$ref').split('/')
+        url.shift()
+
+        displayComp = <a href={url}><b>{displayName}</b></a>
+    }
+
     return (
         <tr>
-            <td>{name}</td>
-            <td>{prop.get('type')}</td>
-            <td>{required && required.includes(name) ? 'required' : ''}</td>
+            <td>{name} {required && required.includes(name) ? <span className="required">required</span> : ''}</td>
+            <td>{displayComp}</td>
             <td>{prop.get('description')}</td>
         </tr>
     )
@@ -23,20 +33,17 @@ export const Properties = ({name, definition}) => {
                 {/*  Table for the Attributes of the object  */}
                 <table className="ui celled striped table" id="table">
                     <thead>
-                    <tr>
-                        <th column="name">
-                            <strong>Name</strong>
-                        </th>
-                        <th column="type">
-                            <em>Type</em>
-                        </th>
-                        <th column="required">
-                            <em>Required</em>
-                        </th>
-                        <th column="description">
-                            <em>Description</em>
-                        </th>
-                    </tr>
+                        <tr>
+                            <th>
+                                <strong>Name</strong>
+                            </th>
+                            <th>
+                                <strong>Type</strong>
+                            </th>
+                            <th>
+                                <strong>Description</strong>
+                            </th>
+                        </tr>
                     </thead>
                     <tbody>
                     {
