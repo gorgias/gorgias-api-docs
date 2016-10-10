@@ -1,14 +1,227 @@
-/* Gorgias API Reference
- */
+/* Gorgias API Docs - style */
 
-/* shared styles between the User Documentation and the API Reference
- */
-@import 'shared';
-
-/* api ref styles
- */
-@import 'global';
+@import 'json-tree.less';
 @import 'navigation';
-@import 'content';
-@import 'properties';
-@import 'responses';
+@import 'paths';
+
+/* Color Variables */
+@grey_text: #444444;
+
+@dark_blue_gorgias: #1c4969;
+@middle_blue_gorgias: #255f89;
+@blue_gorgias: #0993f4;
+@light_grey_gorgias: #f7f7f7;
+@grey_gorgias: #dbdada;
+
+@dark_grey_code: #2d3134;
+@medium_grey_code: #282b2c;
+@medium_grey: #888;
+
+@light_grey: #939da3;
+@light_blue: #fafcfc;
+@dark_blue: #0A202D;
+
+/* Font Variables */
+@font-face {
+  font-family: "Museo 300";
+  src: url('../fonts/MuseoSansRounded-300.otf') format("opentype");
+}
+
+@museo_300: "Museo 300", Arial, 'Helvetica Neue', Helvetica, sans-serif;
+@source_sans_pro: 'Source Sans Pro', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+@consolas: 'Consolas', "Liberation Mono", Menlo, Courier, monospace;
+
+
+
+/* Global */
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 15px;
+  line-height: 1.6;
+  font-family: @source_sans_pro;
+  color: @grey_text;
+  background: @light_grey_gorgias;
+  margin: 0;
+}
+
+h1, h2, h3 {
+  font-family: @source_sans_pro;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 20px;
+  margin-top: 30px;
+}
+
+h3 {
+  font-size: 15px;
+  margin-top: 30px;
+}
+
+a:hover {
+  text-decoration: underline !important;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+/* layout
+ */
+
+html,
+body,
+#root,
+#root > div {
+  height: 100%;
+}
+
+#root {
+  overflow: hidden;
+}
+
+
+/* Main */
+.main {
+  float: left;
+  width: 85%;
+  height: 100%;
+  overflow: auto;
+}
+
+
+/* Grid */
+.Grid {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  &-right {
+    display: flex;
+    width: 50%;
+    background-color: @dark_grey_code;
+  }
+  &-left {
+    width: 50%;
+    background-color: white;
+  }
+  &-inside {
+    padding: 40px;
+    width: 100%;
+  }
+  &-top {
+    align-items: flex-start;
+  }
+}
+
+
+.left-background {
+  position: absolute;
+  right: 42.5%;
+  z-index: -1;
+  height: 100%;
+  width: 42.5%;
+  background-color: white;
+}
+
+.right-background {
+  position: absolute;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  width: 42.5%;
+  background-color: @dark_grey_code;
+}
+
+/* Columns */
+
+.columnCenter {
+  float: left;
+  &, .columnCenter:before {
+    width: 45%;
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+    left: 0%;
+    background-color: white;
+  }
+}
+
+.columnRight {
+  float: left;
+  background-color: @dark_grey_code;
+  &, .columnRight:before {
+    width: 55%;
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+    left: 45%;
+    background-color: @dark_grey_code;
+  }
+}
+
+.text-right {
+  color: @light_grey_gorgias;
+}
+
+.code {
+  font-size: 13px;
+  font-family: @consolas;
+  border-radius: 5px;
+  background: @medium_grey_code;
+  padding: 20px;
+  color: #FFF;
+
+  &.light {
+    color: #000;
+    background: @light_grey_gorgias;
+  }
+
+  &.inline {
+    display: inline;
+    padding: 2px 4px;
+  }
+}
+
+.request {
+  background: @light_grey_gorgias;
+  color: @grey_text;
+  padding: 15px;
+}
+
+.tableCard {
+  /*background: @light_blue;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  font-size: 12px;*/
+}
+
+/* Properties */
+
+.required {
+  display: inline-block;
+  color: white;
+  background: @blue_gorgias;
+  margin: 0 0 0 5px;
+  padding: 2px 10px;
+  font-size: 10px;
+  text-transform: uppercase;
+  border-radius: 100px;
+}

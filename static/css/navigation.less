@@ -1,78 +1,71 @@
-/* navigation
- */
+/* Navigation */
 
 .navigation {
-  padding: 1em;
+  float: left;
+  width: 15%;
+  height: 100%;
   overflow: auto;
-  background: #004fac;
-}
+  background: @dark_blue_gorgias;
 
-@media all and (min-width: 50em) {
-  .navigation {
-    float: left;
-    width: 16%;
-    height: 100%;
+  .logo-wrapper {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid @middle_blue_gorgias;
+    margin: 0;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .logo {
+      color: @blue_gorgias;
+      font-weight: 300;
+      font-size: 1.3vw;
+      margin: auto;
+      max-width: 250px;
+
+      .gorgias-logo {
+        width: 74%;
+      }
+    }
   }
-}
 
+  a {
+    color: rgba(255,255,255,.5);
+    transition: color 0.1s;
 
-.logo {
-  max-width: 100%;
-  opacity: .8;
+    &:visited {
+      color: rgba(255,255,255,.5);
+    }
 
-  line-height: 1.6;
-  text-decoration: none;
-}
+    &:hover, &:active {
+      color: white;
+      transition: color 0.1s;
+      text-decoration: none !important;
+    }
+  }
 
-.logo:hover {
-  opacity: 1;
-}
+  p {
+    color: white;
+    margin: 25px 20px 0px;
+  }
 
-.logo img {
-  width: 60%;
-}
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 0;
+  }
 
-.logo span {
-  margin: 0 0 0 .4em;
+  li {
+    a {
+      padding: 0 20px;
+      display: block;
+      width: 100%;
+    }
 
-  color: rgba(255, 255, 255, .8);
-  font-size: 1.24em;
-  line-height: 1.24;
-  vertical-align: top;
-}
-
-.navigation h2 {
-  margin: 2em 0 .4em;
-
-  font-size: 1em;
-  color: rgba(255, 255, 255, .4);
-}
-
-.navigation ul {
-  list-style-type: none;
-  padding-left: 0;
-  margin-top: 0;
-}
-
-.nav-item {
-  display: block;
-  margin: 0 -1em;
-  padding: 0 1em;
-
-  line-height: 2;
-}
-
-.nav-item,
-.nav-item:visited {
-  color: rgba(255, 255, 255, .86);
-  text-decoration: none;
-}
-
-.nav-item:hover {
-  background: rgba(255, 255, 255, .08);
-}
-
-.nav-item-active {
-  color: #fff;
-  font-weight: bold;
+    .activeLink {
+      color: white;
+      background: rgba(0, 0, 0, 0.1);
+    }
+  }
 }

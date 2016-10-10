@@ -38,6 +38,7 @@
     "webpack-dev-server": "^1.12.1"
   },
   "dependencies": {
+    "axios": "^0.15.2",
     "immutable": "^3.8.1",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",

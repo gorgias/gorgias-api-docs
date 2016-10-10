@@ -1,15 +1,13 @@
 import React from 'react'
-import {fromJS} from 'immutable'
-import data from '../../data/openapi.json'
 import {Properties} from './Properties'
 import {Path} from './Path'
 
-const openapi = fromJS(data)
-
 // A Tag groups a list of Paths
 export const Tag = ({params}) => {
+    const openapi = window.openapi
     const tags = openapi.get('tags')
-    const tag = tags.find(t => t.get('name') === params.tag)
+    const tag = tags.find((tag) => tag.get('name') === params.tag)
+
     const definitions = openapi.get('definitions')
     const definition = definitions.find((def, name) => name === tag.get('name'))
 
@@ -20,23 +18,26 @@ export const Tag = ({params}) => {
     })
 
     return (
-        <div className="content">
-            <div className="content-block">
-                <div className="content-block-details">
+        <div className="Grid">
+            {/*  first block  */}
+            <div className="Grid-left">
+                <div className="Grid-inside">
                     <h1>{tag.get('name')}</h1>
                     <p>{tag.get('description')}</p>
-                </div>
-            </div>
-
-            <div className="content-block">
-                <div className="content-block-details">
+                    {
+                        !!definition && (
+                            <p>{definition.get('description')}</p>
+                        )
+                    }
                     <Properties name={tag.get('name')} definition={definition}/>
                 </div>
             </div>
-
-            {paths.map((verbs, uri) => (
-                <Path key={uri} verbs={verbs} uri={uri}/>
-            )).toList()}
+            <div className="Grid-right"></div>
+            {
+                paths.map((verbs, uri) => (
+                    <Path key={uri} verbs={verbs} uri={uri}/>
+                )).toList()
+            }
         </div>
     )
 }
