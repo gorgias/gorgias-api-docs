@@ -1,5 +1,6 @@
 import React from 'react'
-import {fromJS} from 'immutable'
+import {fromJS, List, OrderedMap} from 'immutable'
+import {JSONTree} from './JsonTree/JsonTree'
 import data from '../../data/openapi.json'
 const openapi = fromJS(data)
 
@@ -81,21 +82,25 @@ const examplify = (schema) => {
                 case 'array': {
                     if (schema.getIn(['items', '$ref'])) {
                         if (schema.getIn(['meta', 'only'])) {
-                            return examplify(
+                            return fromJS([examplify(
                                 getDefinitionProperties(
                                     schema.getIn(['items', '$ref']),
                                     schema.getIn(['meta', 'only'])
                                 )
-                            )
+                            )])
                         }
 
-                        return [{id: 1}]
+                        return fromJS([{_schema: schema.getIn(['items', '$ref']), id: 1}])
                     } else if (schema.getIn(['items', 'type'])) {
-                        return [examplify(schema.getIn(['items', 'type']))]
+                        return List([examplify(schema.getIn(['items', 'type']))])
                     } else {
                         console.log('SOMETHING WENT WRONG', schema.toJS())
                         break
                     }
+                }
+
+                case 'object': {
+                    return examplify(schema.get('properties'))
                 }
 
                 default:
@@ -112,7 +117,7 @@ const examplify = (schema) => {
             )
         }
 
-        return {id: 1} //schema.get('$ref').split('/')[2] //examplify(getDefinition(schema.get('$ref')).get('properties'), nestLevel + 1)
+        return fromJS({_schema: schema.get('$ref'), id: 1})  //schema.get('$ref').split('/')[2] //examplify(getDefinition(schema.get('$ref')).get('properties'), nestLevel + 1)
     }
 
     return schema.map(value => examplify(value))
@@ -140,13 +145,14 @@ const getDefinitionProperties = (ref, only = null) => {
 
     response = response.get('properties')
 
-    console.log(only)
-
     if (only) {
         response = response.filter((value, key) => only.includes(key))
     }
 
-    return response
+    let res = OrderedMap({_schema: ref})
+    res = res.merge(response)
+
+    return res
 }
 
 export const Response = ({status, responseRef}) => {
@@ -169,16 +175,14 @@ export const Response = ({status, responseRef}) => {
         if (transformInArray) {
             response = [response]
         }
-
-        response = JSON.stringify(response, null, 4)
     }
 
     return (
         <div>
             <h3 className="text-right">{status}</h3>
-            <pre className="code">
-                {response}
-            </pre>
+            <div className="code">
+                <JSONTree data={fromJS(response)}/>
+            </div>
         </div>
     )
 }
@@ -229,7 +233,6 @@ export const Path = ({uri, verbs}) => {
     const anchor = parts.slice(1, parts.length - 1).join('-')
     return (
         <div className="paths" id={anchor}>
-            
             {verbs.map((verb, method) => (
                 <Verb key={method} verb={verb} method={method} uri={uri}/>
             )).toList()}
