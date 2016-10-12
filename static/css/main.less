@@ -44,10 +44,21 @@
 .link-object {
   padding: 5px 0;
   display: inline-block;
+  color: @medium_grey;
+  text-decoration: none;
+
+  &:active {
+    color: @grey_text;
+  }
 }
 
 a:hover {
   text-decoration: underline;
+}
+
+a {
+  color: black;
+  text-decoration: none;
 }
 
 /* Global */
@@ -84,14 +95,6 @@ h2 {
 h3 {
   font-size: 15px;
   margin-top: 30px;
-}
-
-a {
-  color: @medium_grey;
-  text-decoration: none;
-  &:active {
-    color: @grey_text;
-  }
 }
 
 /* layout
@@ -244,4 +247,16 @@ body,
   margin-bottom: 10px;
   padding: 5px 10px;
   font-size: 12px;*/
+}
+
+/* Properties */
+
+.required {
+  display: inline-block;
+  color: white;
+  background: @blue_gorgias;
+  margin: 0 5px;
+  padding: 2px 10px;
+  font-size: 11px;
+  border-radius: 100px;
 }

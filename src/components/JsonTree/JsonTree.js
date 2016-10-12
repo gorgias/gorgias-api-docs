@@ -58,17 +58,17 @@ const ObjectComponent = ({data, root = false, last = false}) => {
                     const isArray = childNode.type.name && childNode.type.name === 'ArrayComponent'
 
                     if (k === '_schema') {
-                        return <LinkToDefinition schemaRef={v} />
+                        return <LinkToDefinition key={`${k}-${idx}`} schemaRef={v} />
                     }
 
                     return (
-                        <div className="field">
+                        <div key={`${k}-${idx}`} className="field">
                             <span className="string-key">"{k}": </span>{isObject && leftBracket}{isArray && leftArrayBracket}
                             {childNode}
                             {idx < data.size && !isObject && !isArray && ','}
                         </div>
                     )
-                })
+                }).toList().toJS()
             }
             </div>
             <span>{rightBracket}{!last && !root && ','}</span>
