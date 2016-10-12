@@ -1,10 +1,12 @@
 import React, {Link} from 'react'
 import {Map, List} from 'immutable'
 
-const OBJECT_TYPES = ['ObjectComponent', 'ArrayComponent']
-
 export const JSONTree = ({data}) => {
-    return switchComponent(data, true)
+    return (
+        <div className="json-tree">
+            {switchComponent(data, true)}
+        </div>
+    )
 }
 
 const switchComponent = (data, root = false, last = false) => {
@@ -30,9 +32,23 @@ const ObjectComponent = ({data, root = false, last = false}) => {
 
     let idx = 0
 
+    let isSchema = false
+    let ref = null
+
+    data.map((v, k) => {
+        if (k === '_schema') {
+            isSchema = true
+            ref = v
+        }
+    })
+
+    if (data.size === 1 && isSchema) {
+        return <LinkToDefinition schemaRef={ref}/>
+    }
+
     return (
         <div className="object">
-            <span>{root && leftBracket}</span>
+            <span>{root && !(data.size === 1 && isSchema) && leftBracket}</span>
             <div className="content">
             {
                 data.map((v, k) => {
@@ -47,7 +63,7 @@ const ObjectComponent = ({data, root = false, last = false}) => {
 
                     return (
                         <div className="field">
-                            <span>"{k}": </span>{isObject && leftBracket}{isArray && leftArrayBracket}
+                            <span className="string-key">"{k}": </span>{isObject && leftBracket}{isArray && leftArrayBracket}
                             {childNode}
                             {idx < data.size && !isObject && !isArray && ','}
                         </div>
@@ -92,8 +108,8 @@ const LinkToDefinition = ({schemaRef}) => {
     const url = schemaRef.substring(1)
     const displayName = schemaRef.split('/')[2]
     return (
-        <a className="link-comment" href={url}>
-            {`// Go to definition of ${displayName}`}
+        <a href={url} className="link-object">
+            {`${displayName}`}
         </a>
     )
 }

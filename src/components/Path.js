@@ -31,13 +31,18 @@ export const Responses = ({responses}) => {
     return (
         <div>
             {
-                responses.entrySeq().map((entry, idx) => (
-                    <Response
-                        key={idx}
-                        status={entry[0]}
-                        responseRef={entry[1]}
-                    />
-                )).toJS()
+                responses.entrySeq().map((entry, idx) => {
+                    if (idx === 0) { // tmp fix to have only the first ex response
+                        return (
+                            <Response
+                                key={idx}
+                                status={entry[0]}
+                                responseRef={entry[1]}
+                            />
+                        )
+                    }
+                    return null
+                }).toJS()
             }
         </div>
     )
@@ -90,7 +95,7 @@ const examplify = (schema) => {
                             )])
                         }
 
-                        return fromJS([{_schema: schema.getIn(['items', '$ref']), id: 1}])
+                        return fromJS([{_schema: schema.getIn(['items', '$ref'])}])
                     } else if (schema.getIn(['items', 'type'])) {
                         return List([examplify(schema.getIn(['items', 'type']))])
                     } else {
@@ -117,7 +122,7 @@ const examplify = (schema) => {
             )
         }
 
-        return fromJS({_schema: schema.get('$ref'), id: 1})  //schema.get('$ref').split('/')[2] //examplify(getDefinition(schema.get('$ref')).get('properties'), nestLevel + 1)
+        return fromJS({_schema: schema.get('$ref')})
     }
 
     return schema.map(value => examplify(value))
@@ -179,9 +184,9 @@ export const Response = ({status, responseRef}) => {
 
     return (
         <div>
-            <h3 className="text-right">{status}</h3>
+            <h3 className="text-right">Example response</h3>
             <div className="code">
-                <JSONTree data={fromJS(response)}/>
+                <JSONTree data={fromJS(response)} />
             </div>
         </div>
     )

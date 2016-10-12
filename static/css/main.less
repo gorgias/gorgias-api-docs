@@ -1,6 +1,6 @@
 /* Color Variables */
 @grey_text: #444444;
-@blue_gorgias: #0d87dd;
+@blue_gorgias: #0993f4;
 @light_grey_gorgias: #f7f7f7;
 @grey_gorgias: #dbdada;
 @dark_grey_code: #2d3134;
@@ -20,10 +20,13 @@
 @source_sans_pro: 'Source Sans Pro', Arial, 'Helvetica Neue', Helvetica, sans-serif;
 @consolas: 'Consolas', "Liberation Mono", Menlo, Courier, monospace;
 
-
 /* JSON Tree */
 .content {
   padding-left: 40px;
+}
+
+.string-key {
+  // nothing yet
 }
 
 .string-value {
@@ -38,7 +41,12 @@
   color: #D25252;
 }
 
-.link-comment:hover {
+.link-object {
+  padding: 5px 0;
+  display: inline-block;
+}
+
+a:hover {
   text-decoration: underline;
 }
 
@@ -99,7 +107,6 @@ body,
 #root {
   overflow: hidden;
 }
-
 
 /* Navigation */
 
@@ -238,4 +245,3 @@ body,
   padding: 5px 10px;
   font-size: 12px;*/
 }
-
