@@ -20,12 +20,18 @@ export const App = ({children}) => (
 
             <p>API</p>
             <ul>
-                {openapi.get('tags').sort((v1, v2) => v1.get('name') > v2.get('name')).map(tag => (
-                    <li key={tag.get('name')}>
-                        <Link activeClassName="activeLink"
-                              to={`/api/${tag.get('name')}`}>{tag.get('name')}</Link>
-                    </li>
-                )).toList().toJS()}
+                {
+                    openapi.get('tags').sort((v1, v2) => v1.get('name') > v2.get('name')).map(tag => (
+                        <li key={tag.get('name')}>
+                            <Link
+                                activeClassName="activeLink"
+                                to={`/api/${tag.get('name')}`}
+                            >
+                                {tag.get('name')}
+                            </Link>
+                        </li>
+                    )).toList().toJS()
+                }
             </ul>
 
             <p>DEFINITIONS</p>

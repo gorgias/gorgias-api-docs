@@ -61,9 +61,16 @@ const ObjectComponent = ({data, root = false, last = false}) => {
                         return <LinkToDefinition key={`${k}-${idx}`} schemaRef={v} />
                     }
 
+                    let childIsSchema = false
+                    console.log(v)
+
+                    if (typeof v === 'object' && v.size === 1 && v.get('_schema')) {
+                        childIsSchema = true
+                    }
+
                     return (
                         <div key={`${k}-${idx}`} className="field">
-                            <span className="string-key">"{k}": </span>{isObject && leftBracket}{isArray && leftArrayBracket}
+                            <span className="string-key">"{k}": </span>{isObject && !childIsSchema && leftBracket}{isArray && leftArrayBracket}
                             {childNode}
                             {idx < data.size && !isObject && !isArray && ','}
                         </div>

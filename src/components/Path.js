@@ -1,6 +1,6 @@
 import React from 'react'
 import {fromJS, List, OrderedMap} from 'immutable'
-import {JSONTree} from './JsonTree/JsonTree'
+import {JSONTree} from './JsonTree'
 import data from '../../data/openapi.json'
 const openapi = fromJS(data)
 
