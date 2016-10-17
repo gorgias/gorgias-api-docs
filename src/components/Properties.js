@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router'
 
 const Property = ({prop, name, required}) => {
     const displayName = prop.get('type') || prop.get('$ref').split('/')[2]
@@ -9,7 +10,7 @@ const Property = ({prop, name, required}) => {
         const url = prop.get('$ref').split('/')
         url.shift()
 
-        displayComp = <a href={`/${url.join('/')}`}><b>{displayName}</b></a>
+        displayComp = <Link to={`/${url.join('/')}`}><b>{displayName}</b></Link>
     }
 
     return (
