@@ -43,7 +43,7 @@ export const App = ({children}) => (
                 }
             </ul>
 
-            <p>DEFINITIONS</p>
+            <p>OBJECTS</p>
             <ul>
                 {
                     openapi.get('definitions').sortBy((v, k) => k).map((def, name) => (
