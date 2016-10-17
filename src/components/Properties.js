@@ -1,20 +1,23 @@
 import React from 'react'
+import {Link} from 'react-router'
 
 const Property = ({prop, name, required}) => {
     const displayName = prop.get('type') || prop.get('$ref').split('/')[2]
     let displayComp = displayName
 
-
     if (!prop.get('type') && prop.get('$ref')) {
-        const url = prop.get('$ref').split('/')
+        let url = prop.get('$ref').split('/')
         url.shift()
+        url = `/${url.join('/')}`
 
-        displayComp = <a href={url}><b>{displayName}</b></a>
+        displayComp = <Link to={url}><b>{displayName}</b></Link>
+    } else if (prop.get('type') && prop.get('format')) {
+        displayComp = `${prop.get('format')} (${prop.get('type')})`
     }
 
     return (
         <tr>
-            <td>{name} {required && required.includes(name) ? <span className="required">required</span> : ''}</td>
+            <td>{name} {required && required.includes(name) ? <span className="required">req.</span> : ''}</td>
             <td>{displayComp}</td>
             <td>{prop.get('description')}</td>
         </tr>
@@ -35,13 +38,13 @@ export const Properties = ({name, definition}) => {
                     <thead>
                         <tr>
                             <th>
-                                <strong>Name</strong>
+                                Name
                             </th>
                             <th>
-                                <strong>Type</strong>
+                                Type
                             </th>
                             <th>
-                                <strong>Description</strong>
+                                Description
                             </th>
                         </tr>
                     </thead>
