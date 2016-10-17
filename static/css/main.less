@@ -1,6 +1,7 @@
 /* Color Variables */
 @grey_text: #444444;
 @blue_gorgias: #0993f4;
+@dark_blue_gorgias: #1c4969;
 @light_grey_gorgias: #f7f7f7;
 @grey_gorgias: #dbdada;
 @dark_grey_code: #2d3134;
@@ -79,12 +80,8 @@ body {
 }
 
 h1, h2, h3 {
-  font-family: @museo_300;
-  font-weight: 300;
-}
-
-h1 {
-  font-size: 24px;
+  font-family: @source_sans_pro;
+  font-weight: 700;
 }
 
 h2 {
@@ -116,37 +113,48 @@ body,
 .navigation {
   float: left;
   width: 15%;
+  min-width: 200px;
+  max-width: 260px;
   height: 100%;
   overflow: auto;
-  background: @light_blue;
-  padding-left: 20px;
+  background: @dark_blue_gorgias;
 
   a {
-    color: @dark_blue;
-    a:visited {
-      color: @dark_blue;
+    color: rgba(255,255,255,.5);
+    transition: color 0.2s;
+
+    &:visited {
+      color: rgba(255,255,255,.5);
     }
-    &:hover {
-      color: @blue_gorgias;
-    }
-    &:active {
-      color: @grey_text;
+
+    &:hover, &:active {
+      color: white;
+      transition: color 0.001s;
+      text-decoration: None;
     }
   }
+
   p {
     color: @light_grey;
-    margin: 25px 0px 0px;
+    margin: 25px 20px 0px;
   }
+
   ul {
     list-style-type: none;
     padding-left: 0;
     margin-top: 0;
   }
+
   li {
-    padding: 1px 0;
+    a {
+      padding: 1px 20px;
+      display: block;
+      width: 100%;
+    }
 
     .activeLink {
-      color: @blue_gorgias;
+      color: white;
+      background: rgba(0, 0, 0, 0.1);
     }
   }
 }
@@ -163,6 +171,17 @@ body,
   min-height: 100%;
 }
 
+.gorgias-logo {
+  width: 74%;
+}
+
+.logo {
+  color: @blue_gorgias;
+  font-weight: 300;
+  font-size: 1.3vw;
+  padding: 0 20px;
+}
+
 /* Grid */
 .Grid {
   display: flex;
@@ -172,12 +191,12 @@ body,
   padding: 0;
   &-right {
     display: flex;
-    width: 55%;
+    width: 50%;
     background-color: @dark_grey_code;
   }
   &-left {
     display: flex;
-    width: 45%;
+    width: 50%;
     background-color: white;
   }
   &-inside {
