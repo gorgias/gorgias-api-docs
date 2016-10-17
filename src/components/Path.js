@@ -188,7 +188,7 @@ export const Response = ({status, responseRef}) => {
     }
 
     return (
-        <div>
+        <div className="response">
             <h3 className="text-right">Example response</h3>
             <div className="code">
                 {response}

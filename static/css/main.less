@@ -192,15 +192,15 @@ body,
   overflow: auto;
 }
 
-.main > .Grid {
-  min-height: 100%;
-}
-
 
 /* Grid */
 
 .paths {
   width: 100%;
+
+  .response {
+    margin-top: 50px;
+  }
 }
 
 .Grid {
@@ -225,6 +225,25 @@ body,
   &-top {
     align-items: flex-start;
   }
+}
+
+
+.left-background {
+  position: absolute;
+  right: 42.5%;
+  z-index: -1;
+  height: 100%;
+  width: 42.5%;
+  background-color: white;
+}
+
+.right-background {
+  position: absolute;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  width: 42.5%;
+  background-color: @dark_grey_code;
 }
 
 /* Columns */
