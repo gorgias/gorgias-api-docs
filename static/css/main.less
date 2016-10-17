@@ -1,12 +1,16 @@
 /* Color Variables */
 @grey_text: #444444;
-@blue_gorgias: #0993f4;
+
 @dark_blue_gorgias: #1c4969;
+@middle_blue_gorgias: #255f89;
+@blue_gorgias: #0993f4;
 @light_grey_gorgias: #f7f7f7;
 @grey_gorgias: #dbdada;
+
 @dark_grey_code: #2d3134;
 @medium_grey_code: #282b2c;
 @medium_grey: #888;
+
 @light_grey: #939da3;
 @light_blue: #fafcfc;
 @dark_blue: #0A202D;
@@ -121,7 +125,7 @@ body,
 
   a {
     color: rgba(255,255,255,.5);
-    transition: color 0.2s;
+    transition: color 0.1s;
 
     &:visited {
       color: rgba(255,255,255,.5);
@@ -129,7 +133,7 @@ body,
 
     &:hover, &:active {
       color: white;
-      transition: color 0.001s;
+      transition: color 0.1s;
       text-decoration: None;
     }
   }
@@ -179,7 +183,10 @@ body,
   color: @blue_gorgias;
   font-weight: 300;
   font-size: 1.3vw;
-  padding: 0 20px;
+  padding: 20px;
+  background: @dark_blue_gorgias;
+  border-bottom: 1px solid @middle_blue_gorgias;
+  margin: 0;
 }
 
 /* Grid */
