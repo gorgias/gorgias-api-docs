@@ -5,12 +5,12 @@ const Property = ({prop, name, required}) => {
     const displayName = prop.get('type') || prop.get('$ref').split('/')[2]
     let displayComp = displayName
 
-
     if (!prop.get('type') && prop.get('$ref')) {
-        const url = prop.get('$ref').split('/')
+        let url = prop.get('$ref').split('/')
         url.shift()
+        url = `/${url.join('/')}`
 
-        displayComp = <Link to={`/${url.join('/')}`}><b>{displayName}</b></Link>
+        displayComp = <Link to={url}><b>{displayName}</b></Link>
     }
 
     return (
