@@ -10,7 +10,7 @@ export const App = ({children}) => (
     <div>
         {/*   Navigation SideColumn   */}
         <div className="navigation">
-            <h1>Gorgias <span style={{ color: '#0d87dd'}}> API </span></h1>
+            <h1><img src="/static/img/gorgias-logo-black.png"/> <span style={{ color: '#0d87dd'}}> API </span></h1>
             <p>INTRODUCTION</p>
             <ul>
                 <li>
