@@ -181,13 +181,17 @@ export const Response = ({status, responseRef}) => {
         if (transformInArray) {
             response = [response]
         }
+
+        response = <JSONTree data={fromJS(response)}/>
+    } else if (typeof(responseRef) !== 'string' && responseRef.get('description')) {
+        response = responseRef.get('description')
     }
 
     return (
         <div>
             <h3 className="text-right">Example response</h3>
             <div className="code">
-                <JSONTree data={fromJS(response)} />
+                {response}
             </div>
         </div>
     )

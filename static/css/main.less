@@ -35,7 +35,7 @@
 }
 
 .string-value {
-  color: #619647;
+  color: @blue_gorgias;
 }
 
 .number-value {
@@ -117,11 +117,32 @@ body,
 .navigation {
   float: left;
   width: 15%;
-  min-width: 200px;
-  max-width: 260px;
   height: 100%;
   overflow: auto;
   background: @dark_blue_gorgias;
+
+  .logo-wrapper {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid @middle_blue_gorgias;
+    margin: 0;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .logo {
+      color: @blue_gorgias;
+      font-weight: 300;
+      font-size: 1.3vw;
+      margin: auto;
+      max-width: 250px;
+
+      .gorgias-logo {
+        width: 74%;
+      }
+    }
+  }
 
   a {
     color: rgba(255,255,255,.5);
@@ -173,20 +194,6 @@ body,
 
 .main > .Grid {
   min-height: 100%;
-}
-
-.gorgias-logo {
-  width: 74%;
-}
-
-.logo {
-  color: @blue_gorgias;
-  font-weight: 300;
-  font-size: 1.3vw;
-  padding: 20px;
-  background: @dark_blue_gorgias;
-  border-bottom: 1px solid @middle_blue_gorgias;
-  margin: 0;
 }
 
 /* Grid */

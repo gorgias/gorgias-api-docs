@@ -9,7 +9,7 @@ const Property = ({prop, name, required}) => {
         const url = prop.get('$ref').split('/')
         url.shift()
 
-        displayComp = <a href={url}><b>{displayName}</b></a>
+        displayComp = <a href={`/${url.join('/')}`}><b>{displayName}</b></a>
     }
 
     return (

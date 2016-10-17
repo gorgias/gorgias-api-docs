@@ -10,11 +10,20 @@ export const App = ({children}) => (
     <div>
         {/*   Navigation SideColumn   */}
         <div className="navigation">
-            <h1 className="logo"><img className="gorgias-logo" src="/static/img/gorgias-logo-white-transparent.png"/> <span>API</span></h1>
+            <Link to="/">
+                <div className="logo-wrapper">
+                    <h1 className="logo">
+                        <img className="gorgias-logo" src="/static/img/gorgias-logo-white-transparent.png"/>
+                        <span>API</span>
+                    </h1>
+                </div>
+            </Link>
             <p>INTRODUCTION</p>
             <ul>
                 <li>
-                    <Link activeClassName="activeLink" to="/">Getting Started</Link>
+                    <Link activeClassName="activeLink" to="/getting-started">Getting Started</Link>
+                    <Link activeClassName="activeLink" to="/authentication">Authentication</Link>
+                    <Link activeClassName="activeLink" to="/billing">Billing</Link>
                 </li>
             </ul>
 

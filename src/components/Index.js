@@ -3,6 +3,7 @@ import React from 'react'
 export const Index = () => (
     <div className="main">
         <div className="Grid">
+
             {/*  Left Column  */}
             <div className="Grid-left">
                 <div className="Grid-inside">
@@ -26,10 +27,10 @@ export const Index = () => (
                     </p>
                 </div>
             </div>
+
             {/*  Right Column  */}
             <div className="Grid-right">
                 <div className="Grid-inside">
-                    <h3 className="text-right">API Endpoint</h3>
                 </div>
             </div>
 
