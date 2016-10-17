@@ -18,21 +18,10 @@ export const Definition = ({params}) => {
                     <div className="Grid-inside">
                         <h1>{params.definition}</h1>
                         <p>{definition.get('description')}</p>
-                    </div>
-                </div>
-                <div className="Grid-right"></div>
-
-                {/*  second block  */}
-                <div className="Grid-left">
-                    <div className="Grid-inside">
                         <Properties name={params.definition} definition={definition}/>
                     </div>
                 </div>
-                <div className="Grid-right">
-                    <div className="Grid-inside">
-                        {/* Example */}
-                    </div>
-                </div>
+                <div className="Grid-right"></div>
             </div>
         </div>
     )
