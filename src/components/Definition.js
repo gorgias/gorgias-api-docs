@@ -11,20 +11,16 @@ export const Definition = ({params}) => {
     const definition = definitions.find((def, name) => name === params.definition)
 
     return (
-        <div className="main">
-            <div className="left-background"></div>
-            <div className="right-background"></div>
-            <div className="Grid">
-                {/*  first block  */}
-                <div className="Grid-left ">
-                    <div className="Grid-inside">
-                        <h1>{params.definition}</h1>
-                        <p>{definition.get('description')}</p>
-                        <Properties name={params.definition} definition={definition}/>
-                    </div>
+        <div className="Grid">
+            {/*  first block  */}
+            <div className="Grid-left ">
+                <div className="Grid-inside">
+                    <h1>{params.definition}</h1>
+                    <p>{definition.get('description')}</p>
+                    <Properties name={params.definition} definition={definition}/>
                 </div>
-                <div className="Grid-right"></div>
             </div>
+            <div className="Grid-right"></div>
         </div>
     )
 }

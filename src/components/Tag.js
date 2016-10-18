@@ -20,25 +20,21 @@ export const Tag = ({params}) => {
     })
 
     return (
-        <div className="main">
-            <div className="left-background"></div>
-            <div className="right-background"></div>
-            <div className="Grid">
-                {/*  first block  */}
-                <div className="Grid-left">
-                    <div className="Grid-inside">
-                        <h1>{tag.get('name')}</h1>
-                        <p>{tag.get('description')}</p>
-                        <Properties name={tag.get('name')} definition={definition}/>
-                    </div>
+        <div className="Grid">
+            {/*  first block  */}
+            <div className="Grid-left">
+                <div className="Grid-inside">
+                    <h1>{tag.get('name')}</h1>
+                    <p>{tag.get('description')}</p>
+                    <Properties name={tag.get('name')} definition={definition}/>
                 </div>
-                <div className="Grid-right"></div>
-                {
-                    paths.map((verbs, uri) => (
-                        <Path key={uri} verbs={verbs} uri={uri}/>
-                    )).toList()
-                }
             </div>
+            <div className="Grid-right"></div>
+            {
+                paths.map((verbs, uri) => (
+                    <Path key={uri} verbs={verbs} uri={uri}/>
+                )).toList()
+            }
         </div>
     )
 }
