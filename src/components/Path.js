@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router'
 import {fromJS, List, OrderedMap} from 'immutable'
 import {JSONTree} from './JsonTree'
 import data from '../../data/openapi.json'
@@ -55,8 +56,12 @@ export const Responses = ({responses}) => {
  * @returns {*} the example with fake values
  */
 const examplify = (schema) => {
-    if (typeof(schema) === 'string') {
+    if (typeof(schema) === 'string' || !schema) {
         return schema
+    }
+
+    if (schema.get('$ref')) {
+        return examplify(getDefinitionProperties(schema.get('$ref'), schema.getIn(['meta', 'only'])))
     }
 
     // type.type is schemas with a real `type` field (like `actions` for ex.)
@@ -202,41 +207,77 @@ export const Parameters = ({parameters}) => {
         return null
     }
 
+    const bodyParameter = parameters.find(param => param.get('in') === 'body')
+
+    if (bodyParameter) console.log(bodyParameter.toJS())
+
     return (
-        <table className="ui very basic collapsing celled table">
+        <div>
+            <table className="ui very basic collapsing celled table">
 
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {
+                    parameters.map((paramRef, i) => (
+                        <Parameter key={i} paramRef={paramRef}/>
+                    )).toList()
+                }
+                </tbody>
+
+            </table>
             {
-                parameters.map((paramRef, i) => (
-                    <Parameter key={i} paramRef={paramRef}/>
-                )).toList()
+                bodyParameter && <JSONTree data={examplify(bodyParameter.get('schema'))} />
             }
-            </tbody>
-
-        </table>
+        </div>
     )
 }
 
 export const Parameter = ({paramRef}) => {
-    if (!paramRef.get('$ref')) {
-        console.error('Invalid parameter reference', paramRef)
+    let param = null
+
+    if (!paramRef.get('$ref') && !paramRef.get('schema')) {
+        console.error('Invalid parameter reference', paramRef.toJS())
         return null
+    } else if (paramRef.get('$ref')) {
+        param = openapi.getIn(['parameters', paramRef.get('$ref').replace('#/parameters/', '')])
+    } else {
+        param = paramRef
     }
-    const param = openapi.getIn(['parameters', paramRef.get('$ref').replace('#/parameters/', '')])
+
+    let displayName = param.get('type')
+    let displayComp = displayName
+
+    if (!paramRef.get('type') && paramRef.get('schema') && (
+            paramRef.getIn(['schema', '$ref']) || paramRef.getIn(['schema', 'items', '$ref'])
+        )) {
+        let url = null
+
+        if (paramRef.getIn(['schema', 'type']) === 'array') {
+            url = paramRef.getIn(['schema', 'items', '$ref']).split('/')
+            displayName = `array of ${paramRef.getIn(['schema', 'items', '$ref']).split('/')[2]}`
+        } else {
+            url = paramRef.getIn(['schema', '$ref']).split('/')
+            displayName = paramRef.getIn(['schema', '$ref']).split('/')[2]
+        }
+
+        url.shift()
+        url = `/${url.join('/')}`
+
+        displayComp = <Link to={url}><b>{displayName}</b></Link>
+    }
 
     return (
         <tr>
             <td>{param.get('name')}</td>
-            <td>{param.get('type')}</td>
+            <td>{displayComp}</td>
             <td>{param.get('description')}</td>
-        </tr >
+        </tr>
     )
 }
 
