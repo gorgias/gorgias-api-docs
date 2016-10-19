@@ -1,8 +1,10 @@
 import React from 'react'
 import {fromJS} from 'immutable'
-import data from '../../data/openapi.json'
 import {Properties} from './Properties'
+import {JSONTree} from './JsonTree'
+import {examplify} from './../utils'
 
+import data from '../../data/openapi.json'
 const openapi = fromJS(data)
 
 // Definition
@@ -20,7 +22,14 @@ export const Definition = ({params}) => {
                     <Properties name={params.definition} definition={definition}/>
                 </div>
             </div>
-            <div className="Grid-right"></div>
+            <div className="Grid-right">
+                <div className="Grid-inside">
+                    <h3 className="text-right">Example object:</h3>
+                    <div className="code">
+                        <JSONTree data={examplify(definition)}/>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

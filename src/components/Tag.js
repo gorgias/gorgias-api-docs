@@ -26,6 +26,11 @@ export const Tag = ({params}) => {
                 <div className="Grid-inside">
                     <h1>{tag.get('name')}</h1>
                     <p>{tag.get('description')}</p>
+                    {
+                        !!definition && (
+                            <p>{definition.get('description')}</p>
+                        )
+                    }
                     <Properties name={tag.get('name')} definition={definition}/>
                 </div>
             </div>

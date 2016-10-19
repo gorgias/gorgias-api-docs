@@ -1,0 +1,71 @@
+/* Navigation */
+
+.navigation {
+  float: left;
+  width: 15%;
+  height: 100%;
+  overflow: auto;
+  background: @dark_blue_gorgias;
+
+  .logo-wrapper {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid @middle_blue_gorgias;
+    margin: 0;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .logo {
+      color: @blue_gorgias;
+      font-weight: 300;
+      font-size: 1.3vw;
+      margin: auto;
+      max-width: 250px;
+
+      .gorgias-logo {
+        width: 74%;
+      }
+    }
+  }
+
+  a {
+    color: rgba(255,255,255,.5);
+    transition: color 0.1s;
+
+    &:visited {
+      color: rgba(255,255,255,.5);
+    }
+
+    &:hover, &:active {
+      color: white;
+      transition: color 0.1s;
+      text-decoration: none !important;
+    }
+  }
+
+  p {
+    color: white;
+    margin: 25px 20px 0px;
+  }
+
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 0;
+  }
+
+  li {
+    a {
+      padding: 0 20px;
+      display: block;
+      width: 100%;
+    }
+
+    .activeLink {
+      color: white;
+      background: rgba(0, 0, 0, 0.1);
+    }
+  }
+}

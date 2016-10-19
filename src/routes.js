@@ -6,15 +6,19 @@ import {Index} from './components/Index'
 import {Tag} from './components/Tag'
 import {Definition} from './components/Definition'
 
+import {Parameters} from './components/pages/Parameters'
 import {GettingStarted} from './components/pages/GettingStarted'
 import {Authentication} from './components/pages/Authentication'
 import {Billing} from './components/pages/Billing'
+import {Pagination} from './components/pages/Pagination'
 
 export const routes = (
     <Route path="/" component={App}>
         <IndexRoute component={Index}/>
         <Route path="/getting-started" component={GettingStarted}/>
         <Route path="/authentication" component={Authentication}/>
+        <Route path="/parameters" component={Parameters}/>
+        <Route path="/pagination" component={Pagination}/>
         <Route path="/billing" component={Billing}/>
         <Route path="/api/:tag" component={Tag}/>
         <Route path="/definitions/:definition" component={Definition}/>

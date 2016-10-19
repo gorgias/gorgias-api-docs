@@ -1,3 +1,9 @@
+/* Gorgias API Docs - style */
+
+@import 'json-tree.less';
+@import 'navigation';
+@import 'paths';
+
 /* Color Variables */
 @grey_text: #444444;
 
@@ -25,46 +31,7 @@
 @source_sans_pro: 'Source Sans Pro', Arial, 'Helvetica Neue', Helvetica, sans-serif;
 @consolas: 'Consolas', "Liberation Mono", Menlo, Courier, monospace;
 
-/* JSON Tree */
-.content {
-  padding-left: 40px;
-}
 
-.string-key {
-  // nothing yet
-}
-
-.string-value {
-  color: @blue_gorgias;
-}
-
-.number-value {
-  color: #BED6FF;
-}
-
-.boolean-value {
-  color: #D25252;
-}
-
-.link-object {
-  padding: 5px 0;
-  display: inline-block;
-  color: @medium_grey;
-  text-decoration: none;
-
-  &:active {
-    color: @grey_text;
-  }
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-a {
-  color: black;
-  text-decoration: none;
-}
 
 /* Global */
 
@@ -98,6 +65,15 @@ h3 {
   margin-top: 30px;
 }
 
+a:hover {
+  text-decoration: underline !important;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
 /* layout
  */
 
@@ -112,77 +88,6 @@ body,
   overflow: hidden;
 }
 
-/* Navigation */
-
-.navigation {
-  float: left;
-  width: 15%;
-  height: 100%;
-  overflow: auto;
-  background: @dark_blue_gorgias;
-
-  .logo-wrapper {
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid @middle_blue_gorgias;
-    margin: 0;
-
-    &:hover {
-      background: rgba(0, 0, 0, 0.2);
-    }
-
-    .logo {
-      color: @blue_gorgias;
-      font-weight: 300;
-      font-size: 1.3vw;
-      margin: auto;
-      max-width: 250px;
-
-      .gorgias-logo {
-        width: 74%;
-      }
-    }
-  }
-
-  a {
-    color: rgba(255,255,255,.5);
-    transition: color 0.1s;
-
-    &:visited {
-      color: rgba(255,255,255,.5);
-    }
-
-    &:hover, &:active {
-      color: white;
-      transition: color 0.1s;
-      text-decoration: None;
-    }
-  }
-
-  p {
-    color: white;
-    margin: 25px 20px 0px;
-  }
-
-  ul {
-    list-style-type: none;
-    padding-left: 0;
-    margin-top: 0;
-  }
-
-  li {
-    a {
-      padding: 0 20px;
-      display: block;
-      width: 100%;
-    }
-
-    .activeLink {
-      color: white;
-      background: rgba(0, 0, 0, 0.1);
-    }
-  }
-}
 
 /* Main */
 .main {
@@ -194,15 +99,6 @@ body,
 
 
 /* Grid */
-
-.paths {
-  width: 100%;
-
-  .response {
-    margin-top: 50px;
-  }
-}
-
 .Grid {
   display: flex;
   flex-wrap: wrap;
@@ -292,6 +188,11 @@ body,
   background: @medium_grey_code;
   padding: 20px;
   color: #FFF;
+
+  &.light {
+    color: #000;
+    background: @light_grey_gorgias;
+  }
 }
 
 .request {

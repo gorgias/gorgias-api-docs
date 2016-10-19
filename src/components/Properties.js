@@ -11,11 +11,13 @@ const Property = ({prop, name, required}) => {
         url = `/${url.join('/')}`
 
         displayComp = <Link to={url}><b>{displayName}</b></Link>
+    } else if (prop.get('type') && prop.get('format')) {
+        displayComp = `${prop.get('format')} (${prop.get('type')})`
     }
 
     return (
         <tr>
-            <td>{name} {required && required.includes(name) ? <span className="required">required</span> : ''}</td>
+            <td>{name} {required && required.includes(name) ? <span className="required">req.</span> : ''}</td>
             <td>{displayComp}</td>
             <td>{prop.get('description')}</td>
         </tr>
@@ -36,13 +38,13 @@ export const Properties = ({name, definition}) => {
                     <thead>
                         <tr>
                             <th>
-                                <strong>Name</strong>
+                                Name
                             </th>
                             <th>
-                                <strong>Type</strong>
+                                Type
                             </th>
                             <th>
-                                <strong>Description</strong>
+                                Description
                             </th>
                         </tr>
                     </thead>

@@ -1,7 +1,10 @@
 import React from 'react'
 import {Link} from 'react-router'
-import {fromJS, List, OrderedMap} from 'immutable'
+import {fromJS} from 'immutable'
 import {JSONTree} from './JsonTree'
+
+import {examplify, getDefinitionProperties} from './../utils'
+
 import data from '../../data/openapi.json'
 const openapi = fromJS(data)
 
@@ -49,123 +52,6 @@ export const Responses = ({responses}) => {
     )
 }
 
-/**
- * Take an OpenAPI definition and turn it in an example with fake values.
- *
- * @param schema: the definition to transform
- * @returns {*} the example with fake values
- */
-const examplify = (schema) => {
-    if (typeof(schema) === 'string' || !schema) {
-        return schema
-    }
-
-    if (schema.get('$ref')) {
-        return examplify(getDefinitionProperties(schema.get('$ref'), schema.getIn(['meta', 'only'])))
-    }
-
-    // type.type is schemas with a real `type` field (like `actions` for ex.)
-    if (schema.get('type') && !schema.getIn(['type', 'type'])) {
-        if (schema.get('default')) {
-            return schema.get('default')
-        } else if (schema.getIn(['meta', 'enum'])) {
-            return schema.getIn(['meta', 'enum', 0])
-        } else {
-            switch (schema.get('type')) {
-                case 'string': {
-                    if (schema.get('format') === 'date-time') {
-                        return '2016-10-07T07:38:36'
-                    } else if (schema.get('format') === 'url') {
-                        return 'https://gorgias.io/'
-                    } else {
-                        return 'string'
-                    }
-                }
-
-                case 'boolean': {
-                    return false
-                }
-
-                case 'integer': {
-                    return 1
-                }
-
-                case 'array': {
-                    if (schema.getIn(['items', '$ref'])) {
-                        if (schema.getIn(['meta', 'only'])) {
-                            return fromJS([examplify(
-                                getDefinitionProperties(
-                                    schema.getIn(['items', '$ref']),
-                                    schema.getIn(['meta', 'only'])
-                                )
-                            )])
-                        }
-
-                        return fromJS([{_schema: schema.getIn(['items', '$ref'])}])
-                    } else if (schema.getIn(['items', 'type'])) {
-                        return List([examplify(schema.getIn(['items', 'type']))])
-                    } else {
-                        console.log('SOMETHING WENT WRONG', schema.toJS())
-                        break
-                    }
-                }
-
-                case 'object': {
-                    return examplify(schema.get('properties'))
-                }
-
-                default:
-                    return schema
-            }
-        }
-    } else if (schema.get('$ref')) {
-        if (schema.getIn(['meta', 'only'])) {
-            return examplify(
-                getDefinitionProperties(
-                    schema.get('$ref'),
-                    schema.getIn(['meta', 'only'])
-                )
-            )
-        }
-
-        return fromJS({_schema: schema.get('$ref')})
-    }
-
-    return schema.map(value => examplify(value))
-}
-
-/**
- * Take a ref to a definition and return its properties.
- *
- * @param ref: the ref to the definition
- * @param only (optional): the list of fields to return
- * @returns {*}: the definition, total or partial
- */
-const getDefinitionProperties = (ref, only = null) => {
-    if (!ref) {
-        return ref
-    }
-
-    let response = openapi
-    let path = ref.split('/')
-    path.shift()  // remove the first `#`
-
-    for (var key of path) {
-        response = response.get(key)
-    }
-
-    response = response.get('properties')
-
-    if (only) {
-        response = response.filter((value, key) => only.includes(key))
-    }
-
-    let res = OrderedMap({_schema: ref})
-    res = res.merge(response)
-
-    return res
-}
-
 export const Response = ({status, responseRef}) => {
     let response = responseRef
 
@@ -194,7 +80,7 @@ export const Response = ({status, responseRef}) => {
 
     return (
         <div className="response">
-            <h3 className="text-right">Example response</h3>
+            <h3 className="text-right">Example response (success code: {status})</h3>
             <div className="code">
                 {response}
             </div>
@@ -203,36 +89,50 @@ export const Response = ({status, responseRef}) => {
 }
 
 export const Parameters = ({parameters}) => {
-    if (!parameters) {
+    if (!parameters || !parameters.filter(paramRef => paramRef.get('in') !== 'body')) {
         return null
     }
 
+    const filteredParams = parameters.filter(paramRef => paramRef.get('in') !== 'body')
     const bodyParameter = parameters.find(param => param.get('in') === 'body')
-
-    if (bodyParameter) console.log(bodyParameter.toJS())
 
     return (
         <div>
-            <table className="ui very basic collapsing celled table">
-
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {
-                    parameters.map((paramRef, i) => (
-                        <Parameter key={i} paramRef={paramRef}/>
-                    )).toList()
-                }
-                </tbody>
-
-            </table>
             {
-                bodyParameter && <JSONTree data={examplify(bodyParameter.get('schema'))} />
+                !!filteredParams.size && (
+                    <div>
+                        <h3>URL parameters</h3>
+                        <table className="ui very basic collapsing celled table">
+
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Location</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {
+                                filteredParams.map((paramRef, i) => (
+                                    <Parameter key={i} paramRef={paramRef}/>
+                                )).toList()
+                            }
+                            </tbody>
+
+                        </table>
+                    </div>
+                )
+            }
+            {
+                bodyParameter && (
+                    <div>
+                        <h3>Example request body</h3>
+                        <div className="code light">
+                            <JSONTree data={examplify(bodyParameter.get('schema'), true)} />
+                        </div>
+                    </div>
+                )
             }
         </div>
     )
@@ -241,10 +141,7 @@ export const Parameters = ({parameters}) => {
 export const Parameter = ({paramRef}) => {
     let param = null
 
-    if (!paramRef.get('$ref') && !paramRef.get('schema')) {
-        console.error('Invalid parameter reference', paramRef.toJS())
-        return null
-    } else if (paramRef.get('$ref')) {
+    if (paramRef.get('$ref')) {
         param = openapi.getIn(['parameters', paramRef.get('$ref').replace('#/parameters/', '')])
     } else {
         param = paramRef
@@ -253,9 +150,11 @@ export const Parameter = ({paramRef}) => {
     let displayName = param.get('type')
     let displayComp = displayName
 
-    if (!paramRef.get('type') && paramRef.get('schema') && (
+    if (
+        !paramRef.get('type') && paramRef.get('schema') && (
             paramRef.getIn(['schema', '$ref']) || paramRef.getIn(['schema', 'items', '$ref'])
-        )) {
+        )
+    ) {
         let url = null
 
         if (paramRef.getIn(['schema', 'type']) === 'array') {
@@ -276,6 +175,7 @@ export const Parameter = ({paramRef}) => {
         <tr>
             <td>{param.get('name')}</td>
             <td>{displayComp}</td>
+            <td>{param.get('in')}</td>
             <td>{param.get('description')}</td>
         </tr>
     )
