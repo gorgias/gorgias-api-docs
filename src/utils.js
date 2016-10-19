@@ -1,3 +1,4 @@
+import React from 'react'
 import {fromJS, List, OrderedMap} from 'immutable'
 
 import data from '../data/openapi.json'
@@ -144,4 +145,12 @@ export const getDefinitionProperties = (ref, only = null, exclude = null, onlyRe
     res = res.merge(response)
 
     return res
+}
+
+export const Code = ({light, inline, children}) => {
+    if (inline) {
+        return <span className={`inline code ${light ? 'light' : ''}`}>{children}</span>
+    }
+
+    return <div className={`code ${light ? 'light' : ''}`}>{children}</div>
 }

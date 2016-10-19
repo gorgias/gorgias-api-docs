@@ -24,7 +24,7 @@ export const App = ({children}) => (
                     <Link activeClassName="activeLink" to="/getting-started">Getting Started</Link>
                     <Link activeClassName="activeLink" to="/authentication">Authentication</Link>
                     <Link activeClassName="activeLink" to="/pagination">Pagination</Link>
-                    <Link activeClassName="activeLink" to="/parameters">Parameters</Link>
+                    <Link activeClassName="activeLink" to="/querying-the-api">Querying the API</Link>
                     <Link activeClassName="activeLink" to="/billing">Billing</Link>
                 </li>
             </ul>
