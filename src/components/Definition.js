@@ -25,9 +25,9 @@ export const Definition = ({params}) => {
             <div className="Grid-right">
                 <div className="Grid-inside">
                     <h3 className="text-right">Example object:</h3>
-                    <div className="code">
+                    <Code>
                         <JSONTree data={examplify(definition)}/>
-                    </div>
+                    </Code>
                 </div>
             </div>
         </div>

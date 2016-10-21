@@ -59,7 +59,7 @@ export const Pagination = () => (
                     have to add the parameter you wish to override as a URL parameter. The only overridable parameters
                     are `page` and `per_page`. For example:
                 </p>
-                <div className="code light">GET /api/tickets/?page=2&per_page=20</div>
+                <Code light>GET /api/tickets/?page=2&per_page=20</Code>
             </div>
         </div>
 

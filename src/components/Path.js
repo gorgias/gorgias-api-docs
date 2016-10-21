@@ -3,7 +3,7 @@ import {Link} from 'react-router'
 import {fromJS} from 'immutable'
 import {JSONTree} from './JsonTree'
 
-import {examplify, getDefinitionProperties} from './../utils'
+import {examplify, getDefinitionProperties, Code} from './../utils'
 
 import data from '../../data/openapi.json'
 const openapi = fromJS(data)
@@ -36,7 +36,7 @@ const Verb = ({verb, method, uri}) => (
         <div className="Grid-right">
             <div className="Grid-inside">
                 <h3 className="text-right">HTTP Request</h3>
-                <code className="code">{method.toUpperCase()} {uri}</code>
+                <Code>{method.toUpperCase()} {uri}</Code>
 
                 <Responses responses={verb.get('responses')}  />
             </div>
@@ -94,9 +94,9 @@ export const Response = ({status, responseRef}) => {
     return (
         <div className="response">
             <h3 className="text-right">Example response (success code: {status})</h3>
-            <div className="code">
+            <Code>
                 {response}
-            </div>
+            </Code>
         </div>
     )
 }
@@ -141,9 +141,9 @@ export const Parameters = ({parameters}) => {
                 bodyParameter && (
                     <div>
                         <h3>Example request body</h3>
-                        <div className="code light">
+                        <Code light>
                             <JSONTree data={examplify(bodyParameter.get('schema'), true)} />
-                        </div>
+                        </Code>
                     </div>
                 )
             }

@@ -14,7 +14,7 @@ export const QueryingTheAPI = () => (
                 <p>
                     When sending data in the body, you must send it as <Code light inline>JSON</Code>
                     (with the header <Code light inline>Content-type</Code> set at
-                    <span className="inline light code">application/json</span>).<br/><br/>
+                    <Code light inline>application/json</Code>).<br/><br/>
 
                     For now (and it probably won't change), we don't accept
                     <Code light inline>XML</Code> nor <Code light inline>FormData</Code> content types.

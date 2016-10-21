@@ -1,4 +1,5 @@
 import React from 'react'
+import {Code} from './../../utils'
 
 export const Authentication = () => (
     <div className="Grid">
@@ -15,14 +16,14 @@ export const Authentication = () => (
                 <h3>Basic authentication</h3>
                 <p>
                     You can authenticate to Gorgias using regular HTTP Basic authentication, by including the
-                    <span className="code light inline">Authorization</span> header in your request:
+                    <Code light inline>Authorization</Code> header in your request:
                 </p>
-                <div className="code light">
+                <Code light>
                     Authorization: Basic YWRtaW5AZ29yZ2lhcy5pbzphZG1pbg==
-                </div>
+                </Code>
                 <p>
-                    with <span className="code light inline">YWRtaW5AZ29yZ2lhcy5pbzphZG1pbg==</span> being the string
-                    `username:password` encoded in base64.<br/><br/>
+                    with <Code light inline>YWRtaW5AZ29yZ2lhcy5pbzphZG1pbg==</Code> being the string
+                    <Code light inline>username:password</Code> encoded in base64.<br/><br/>
 
                     Though, this method is not recommended and should never be used, as it's sending your password
                     without encryption at each request.
@@ -32,13 +33,13 @@ export const Authentication = () => (
                 <p>
                     The recommended method of authentication for using the API is to use API keys. You can find your
                     account's API keys on your Gorgias helpdesk,
-                    in <span className="code light inline">Settings > API Keys</span>.<br/><br/>
+                    in <Code light inline>Settings > API Keys</Code>.<br/><br/>
 
                     Using an API Key for authentication is as easy as using Basic authentication: actually, it uses the
                     same process (HTTP Basic authentication), but with your email as username, and the API Key as
                     password.<br/><br/>
 
-                    In <span className="code light inline">Settings > API Keys</span>, you can manage your API Keys,
+                    In <Code light inline>Settings > API Keys</Code>, you can manage your API Keys,
                     e.g. create new API Keys or delete existing ones. We really encourage you to delete any API Key
                     you think may have been compromised, and to replace them frequently.
 
