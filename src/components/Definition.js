@@ -2,7 +2,7 @@ import React from 'react'
 import {fromJS} from 'immutable'
 import {Properties} from './Properties'
 import {JSONTree} from './JsonTree'
-import {examplify} from './../utils'
+import {examplify, Code} from './../utils'
 
 import data from '../../data/openapi.json'
 const openapi = fromJS(data)
