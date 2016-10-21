@@ -8,13 +8,26 @@ import {examplify, getDefinitionProperties} from './../utils'
 import data from '../../data/openapi.json'
 const openapi = fromJS(data)
 
+
+export const Path = ({uri, verbs}) => {
+    const parts = uri.split('/')
+    const anchor = parts.slice(1, parts.length - 1).join('-')
+    return (
+        <div className="paths" id={anchor}>
+            {verbs.map((verb, method) => (
+                <Verb key={method} verb={verb} method={method} uri={uri}/>
+            )).toList()}
+        </div>
+    )
+}
+
 const Verb = ({verb, method, uri}) => (
     <div className="Grid">
         <div className="Grid-left">
             <div className="Grid-inside">
                 {/*  description  */}
                 <div>
-                    <h1>{verb.get('summary')}</h1>
+                    <h2>{verb.get('summary')}</h2>
                     <p>{verb.get('description')}</p>
                 </div>
                 <Parameters parameters={verb.get('parameters')}/>
@@ -178,17 +191,5 @@ export const Parameter = ({paramRef}) => {
             <td>{param.get('in')}</td>
             <td>{param.get('description')}</td>
         </tr>
-    )
-}
-
-export const Path = ({uri, verbs}) => {
-    const parts = uri.split('/')
-    const anchor = parts.slice(1, parts.length - 1).join('-')
-    return (
-        <div className="paths" id={anchor}>
-            {verbs.map((verb, method) => (
-                <Verb key={method} verb={verb} method={method} uri={uri}/>
-            )).toList()}
-        </div>
     )
 }

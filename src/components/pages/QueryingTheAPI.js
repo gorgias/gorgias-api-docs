@@ -22,7 +22,7 @@ export const QueryingTheAPI = () => (
 
                 <h3>Partial updates</h3>
                 <p>
-                    When doing updates on objects (i.e. `PUT /api/tickets/{'{ticket_id}'}/`), you don't have to send all
+                    When doing updates on objects (i.e. <Code light inline>PUT /api/tickets/{'{ticket_id}'}/</Code>), you don't have to send all
                     the data; actually, it's actually better if you don't. Just send the fields you want to modify: it
                     will avoid conflicts if other fields of the object has been modified since you last fetched it, in
                     addition of reducing the size of the request, therefore improving the performances of the API.
