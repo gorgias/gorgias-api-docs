@@ -4,15 +4,7 @@ import {fromJS} from 'immutable'
 import '../../static/css/main.less'
 import data from '../../data/openapi.json'
 
-import {Index} from './Index'
-
 import {Tags} from './Tag'
-import {Definition} from './Definition'
-
-import {GettingStarted} from './pages/GettingStarted'
-import {Authentication} from './pages/Authentication'
-import {QueryingTheAPI} from './pages/QueryingTheAPI'
-import {Pagination} from './pages/Pagination'
 
 const openapi = fromJS(data)
 
@@ -77,14 +69,7 @@ export const App = ({children}) => (
         <div className="main">
             <div className="left-background"></div>
             <div className="right-background"></div>
-
-            <Index/>
-            <GettingStarted/>
-            <Authentication/>
-            <QueryingTheAPI/>
-            <Pagination/>
-            <Tags/>
-            
+            {children}
         </div>
     </div>
 )

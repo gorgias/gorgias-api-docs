@@ -27,7 +27,7 @@ const Verb = ({verb, method, uri}) => (
             <div className="Grid-inside">
                 {/*  description  */}
                 <div>
-                    <h2>{verb.get('summary')}</h2>
+                    <h1>{verb.get('summary')}</h1>
                     <p>{verb.get('description')}</p>
                 </div>
                 <Parameters parameters={verb.get('parameters')}/>

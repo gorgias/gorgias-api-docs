@@ -6,19 +6,11 @@ import {Path} from './Path'
 
 const openapi = fromJS(data)
 
-export const Tags = () => {
-    const tags = openapi.get('tags')
-    return (
-        <div>
-            {
-                tags.map((tag, i) => <Tag key={i} tag={tag}/>)
-            }
-        </div>
-    )
-}
-
 // A Tag groups a list of Paths
-export const Tag = ({tag}) => {
+export const Tag = ({params}) => {
+    const tags = openapi.get('tags')
+    const tag = tags.find((tag) => tag.get('name') === params.tag)
+
     const definitions = openapi.get('definitions')
     const definition = definitions.find((def, name) => name === tag.get('name'))
 
