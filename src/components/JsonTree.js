@@ -60,36 +60,36 @@ const ObjectComponent = ({data, root = false, last = false}) => {
     return (
         <div className="object">
             <span>{root && !(data.size === 1 && isSchema) && leftBracket}</span>
-                <div className="content">
-                {
-                    data.map((v, k) => {
-                        idx++
-                        const childNode = switchComponent(v, false, idx >= data.size)
-                        const isObject = childNode.type.name && childNode.type.name === 'ObjectComponent'
-                        const isArray = childNode.type.name && childNode.type.name === 'ArrayComponent'
+            <div className="content">
+            {
+                data.map((v, k) => {
+                    idx++
+                    const childNode = switchComponent(v, false, idx >= data.size)
+                    const isObject = childNode.type.name && childNode.type.name === 'ObjectComponent'
+                    const isArray = childNode.type.name && childNode.type.name === 'ArrayComponent'
 
-                        if (k == '_schema') {
-                            return <LinkToDefinition key={`${k}-${idx}`} schemaRef={v} />
-                        }
+                    if (k == '_schema') {
+                        return <LinkToDefinition key={`${k}-${idx}`} schemaRef={v} />
+                    }
 
-                        let childIsSchema = false
+                    let childIsSchema = false
 
-                        if (v && typeof v === 'object' && v.size === 1 && v.get('_schema')) {
-                            childIsSchema = true
-                        }
+                    if (v && typeof v === 'object' && v.size === 1 && v.get('_schema')) {
+                        childIsSchema = true
+                    }
 
-                        return (
-                            <div key={`${k}-${idx}`} className="field">
-                                <span className="string-key">"{k}": </span>
-                                {isObject && !childIsSchema && leftBracket}
-                                {isArray && leftArrayBracket}
-                                {childNode}
-                                {idx < data.size && !isObject && !isArray && ','}
-                            </div>
-                        )
-                    }).toList().toJS()
-                }
-                </div>
+                    return (
+                        <div key={`${k}-${idx}`} className="field">
+                            <span className="string-key">"{k}": </span>
+                            {isObject && !childIsSchema && leftBracket}
+                            {isArray && leftArrayBracket}
+                            {childNode}
+                            {idx < data.size && !isObject && !isArray && ','}
+                        </div>
+                    )
+                }).toList().toJS()
+            }
+            </div>
             <span>{rightBracket}{!last && !root && ','}</span>
         </div>
     )

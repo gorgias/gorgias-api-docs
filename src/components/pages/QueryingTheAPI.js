@@ -22,15 +22,17 @@ export const QueryingTheAPI = () => (
 
                 <h3>Partial updates</h3>
                 <p>
-                    When doing updates on objects (i.e. <Code light inline>PUT /api/tickets/{'{ticket_id}'}/</Code>), you don't have to send all
-                    the data; actually, it's actually better if you don't. Just send the fields you want to modify: it
-                    will avoid conflicts if other fields of the object has been modified since you last fetched it, in
-                    addition of reducing the size of the request, therefore improving the performances of the API.
+                    When doing updates on objects (i.e. <Code light inline>PUT /api/tickets/{'{ticket_id}'}/</Code>),
+                    you don't have to send all the data; actually, it's actually better if you don't. Just send the
+                    fields you want to modify: it will avoid conflicts if other fields of the object has been modified
+                    since you last fetched it, in addition of reducing the size of the request, therefore improving the
+                    performances of the API.
                 </p>
 
                 <h3>Nested objects</h3>
                 <p>
-                    When creating or updating an object, if your payload includes nested objects, you must be careful.<br/><br/>
+                    When creating or updating an object, if your payload includes nested objects, you must be
+                    careful.<br/><br/>
 
                     If you just want to reference an object, only include its <Code light inline>id</Code>. If you
                     include any other field, it will <b>update the object</b>. You can do it; however, don't do it by
@@ -38,9 +40,9 @@ export const QueryingTheAPI = () => (
                     your account.<br/><br/>
 
                     When including a nested <Code light inline>User</Code> in an object, if you want to reference it but
-                    don't have it's <Code light inline>id</Code>, you can instead include it's email address. If the user
-                    is not found, a new user will be created with this email address, and it's <Code light inline>id</Code>
-                    will be returned with the response to your request.
+                    don't have it's <Code light inline>id</Code>, you can instead include it's email address. If the
+                    user is not found, a new user will be created with this email address, and it's
+                    <Code light inline>id</Code> will be returned with the response to your request.
                 </p>
             </div>
         </div>

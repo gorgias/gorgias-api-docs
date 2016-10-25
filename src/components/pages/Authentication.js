@@ -51,8 +51,8 @@ export const Authentication = () => (
                     you think may have been compromised, and to replace them frequently.
 
                     {/*
-                    Moreover, you can assign "rights" to your key: only assign what you need, as it would really mitigate
-                    the eventual consequences of a compromised API Key.
+                    Moreover, you can assign "rights" to your key: only assign what you need, as it would really
+                    mitigate the eventual consequences of a compromised API Key.
                     */}
                 </p>
             </div>

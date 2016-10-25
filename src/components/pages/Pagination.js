@@ -43,7 +43,10 @@ export const Pagination = () => (
                     <li>
                         <b>meta:</b>
                         <ul>
-                            <li><b>nb_pages:</b> the total number of pages available on this endpoint, considering the current `per_page`</li>
+                            <li>
+                                <b>nb_pages:</b> the total number of pages available on this endpoint, considering the
+                                current `per_page`
+                            </li>
                             <li><b>per_page:</b> the number of items per page (<u>default</u>: 50)</li>
                             <li><b>item_count:</b> the total number of items available on this endpoint</li>
                             <li><b>page:</b> the current page's number (<u>default</u>: 1)</li>

@@ -22,16 +22,16 @@ export const Errors = () => (
                 <Code light>
                     <JSONTree data={fromJS(
                         {
-                            "error": {
-                                "data": {
-                                    "sender": [
-                                        "Missing data for required field."
+                            error: {
+                                data: {
+                                    sender: [
+                                        'Missing data for required field.'
                                     ],
-                                    "channel": [
-                                        "Missing data for required field."
+                                    channel: [
+                                        'Missing data for required field.'
                                     ]
                                 },
-                                "msg": "Failed to create ticket"
+                                msg: 'Failed to create ticket'
                             }
                         }
                     )}/>
@@ -52,8 +52,8 @@ export const Errors = () => (
                 <Code light>
                     <JSONTree data={fromJS(
                         {
-                            "error": {
-                                "msg": "Resource not found."
+                            error: {
+                                msg: 'Resource not found.'
                             }
                         }
                     )}/>
@@ -68,8 +68,8 @@ export const Errors = () => (
                 <Code light>
                     <JSONTree data={fromJS(
                         {
-                            "error": {
-                                "msg": "The specified HTTP method is not allowed."
+                            error: {
+                                msg: 'The specified HTTP method is not allowed.'
                             }
                         }
                     )}/>
@@ -84,8 +84,8 @@ export const Errors = () => (
                 <Code light>
                     <JSONTree data={fromJS(
                         {
-                            "error": {
-                                "msg": "The resource already exists."
+                            error: {
+                                msg: 'The resource already exists.'
                             }
                         }
                     )}/>
@@ -99,8 +99,8 @@ export const Errors = () => (
                 <Code light>
                     <JSONTree data={fromJS(
                         {
-                            "error": {
-                                "msg": "An external service had an issue."
+                            error: {
+                                msg: 'An external service had an issue.'
                             }
                         }
                     )}/>
