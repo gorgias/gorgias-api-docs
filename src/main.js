@@ -5,10 +5,7 @@ import {fromJS} from 'immutable'
 import axios from 'axios'
 import {routes} from './routes'
 
-const PROD_URL = 'https://gorgias.gorgias.io/doc/openapi.json'
-const DEV_URL = 'http://acme.gorgias.docker/doc/openapi.json'
-
-axios.get(DEV_URL)
+axios.get(__docUrl)
     .then((json = {}) => json.data)
     .then(resp => {
         window.openapi = fromJS(resp)

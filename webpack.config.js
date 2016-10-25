@@ -1,6 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
 
+const DEV_URL = 'http://acme.gorgias.docker/doc/openapi.json'
+
 module.exports = {
     devtool: 'eval',
     entry: [
@@ -14,7 +16,8 @@ module.exports = {
         publicPath: '/static/'
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.DefinePlugin({'__docUrl': DEV_URL})
     ],
     module: {
         preLoaders: [
