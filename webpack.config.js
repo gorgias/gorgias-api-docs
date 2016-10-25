@@ -1,7 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 
-const DEV_URL = 'http://acme.gorgias.docker/doc/openapi.json'
+const DEV_URL = "'http://acme.gorgias.docker/doc/openapi.json'"
 
 module.exports = {
     devtool: 'eval',

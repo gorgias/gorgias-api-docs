@@ -1,7 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 
-const PROD_URL = 'https://gorgias.gorgias.io/doc/openapi.json'
+const PROD_URL = "'https://gorgias.gorgias.io/doc/openapi.json'"
 
 module.exports = {
     entry: './src/main',
