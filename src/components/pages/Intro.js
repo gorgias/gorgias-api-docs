@@ -1,4 +1,5 @@
 import React from 'react'
+import {Code} from "../../utils";
 
 export const Intro = () => (
     <div id="intro" className="section">
@@ -17,6 +18,11 @@ export const Intro = () => (
                 <p>
                     On this page you'll find the complete REST API reference, examples, definitions of objects and
                     tutorials. FYI: We're using the same REST API as described here to power our own helpdesk interface.
+                </p>
+                <p>
+                    Also, in the <Code light inline>Settings > REST API</Code> page of your helpdesk, you will find
+                    a button to subscribe to our Developer newsletter. Please do so if you start using our API, as it
+                    contains important updates about <b>upcoming changes and breaking changes to the API</b>.
                 </p>
             </div>
 
